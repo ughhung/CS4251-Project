@@ -12,6 +12,7 @@ out of the packet-record scan.
 from __future__ import annotations
 
 import argparse
+from datetime import datetime
 import math
 import re
 import struct
@@ -369,13 +370,19 @@ def read_completion_log(path: Path | None) -> dict:
             "min_cycles": None,
             "max_exposed_cycles": None,
             "cycles": {},
+            "roofline_stats": {},
         }
     pattern = re.compile(
         r"sys\[(\d+)\] finished,\s+(\d+) cycles"
         r"(?:,\s+exposed communication\s+(\d+) cycles)?"
     )
+    metric_pattern = re.compile(
+        r"sys\[(\d+)\],\s*([^:]+):\s*"
+        r"([-+]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][-+]?\d+)?)\s*(%)?"
+    )
     cycles = {}
     exposed_cycles = []
+    roofline_stats = {}
     with path.open(errors="replace") as handle:
         for line in handle:
             match = pattern.search(line)
@@ -383,6 +390,16 @@ def read_completion_log(path: Path | None) -> dict:
                 cycles[int(match.group(1))] = int(match.group(2))
                 if match.group(3) is not None:
                     exposed_cycles.append(int(match.group(3)))
+            metric_match = metric_pattern.search(line)
+            if metric_match:
+                rank = int(metric_match.group(1))
+                metric = metric_match.group(2).strip()
+                value = float(metric_match.group(3))
+                unit = metric_match.group(4) or ""
+                roofline_stats.setdefault(rank, {})[metric] = {
+                    "value": value,
+                    "unit": unit,
+                }
     rank_cycles = cycles.values()
     return {
         "ranks": len(cycles),
@@ -390,6 +407,7 @@ def read_completion_log(path: Path | None) -> dict:
         "min_cycles": min(rank_cycles, default=None),
         "max_exposed_cycles": max(exposed_cycles, default=None),
         "cycles": cycles,
+        "roofline_stats": roofline_stats,
     }
 
 
@@ -410,6 +428,7 @@ def generate_report(result_dir: Path, output: Path, completion_log: Path | None,
     pfc = read_pfc(pfc_path) if pfc_path.exists() else {"events": 0}
     mix = read_mix_trace(mix_path, trace_record_size) if mix_path.exists() else {}
     completion = read_completion_log(completion_log)
+    roofline_stats = completion.get("roofline_stats", {})
 
     lines = [
         f"# ASTRA-sim NS-3 Results Report",
@@ -429,6 +448,82 @@ def generate_report(result_dir: Path, output: Path, completion_log: Path | None,
         md_row(["Network-flow finish proxy", fmt_time_ns(fct.get("network_end_ns"))]),
         "",
         "The network-flow finish proxy is `max(start_ns + fct_ns)` and is not a substitute for ASTRA-sim's per-rank workload completion metric.",
+        "",
+        "## Roofline statistics",
+        "",
+    ]
+    if not roofline_stats:
+        if completion_log is None or not completion_log.exists():
+            lines.append(
+                "Roofline statistics are unavailable because the simulator log was not supplied or could not be found. Pass the run's log with `--log`; ASTRA-sim emits these metrics when roofline is enabled."
+            )
+        else:
+            lines.append(
+                "No roofline statistics were found in the supplied log. Confirm that roofline was enabled for that run."
+            )
+    else:
+        metrics = sorted(
+            {
+                metric
+                for rank_stats in roofline_stats.values()
+                for metric in rank_stats
+            }
+        )
+        metric_units = {
+            metric: next(
+                (
+                    values[metric]["unit"]
+                    for values in roofline_stats.values()
+                    if metric in values
+                ),
+                "",
+            )
+            for metric in metrics
+        }
+        rank_ids = sorted(set(completion.get("cycles", {})) | set(roofline_stats))
+        lines += [
+            "Summary across ranks (arithmetic mean of ranks that logged each metric):",
+            "",
+            md_row(["Metric", "Mean", "Minimum", "Maximum", "Ranks reported"]),
+            md_row(["---", "---", "---", "---", "---"]),
+        ]
+        for metric in metrics:
+            values = [
+                rank_stats[metric]["value"]
+                for rank_stats in roofline_stats.values()
+                if metric in rank_stats
+            ]
+            unit = metric_units[metric]
+            label = f"{metric} ({unit})" if unit else metric
+            lines.append(
+                md_row(
+                    [
+                        label,
+                        f"{mean(values):,.3f}{unit}",
+                        f"{min(values):,.3f}{unit}",
+                        f"{max(values):,.3f}{unit}",
+                        fmt_num(len(values)),
+                    ]
+                )
+            )
+        lines += [
+            "",
+            "Per-rank values:",
+            "",
+            md_row(["Rank", "Metric", "Value"]),
+            md_row(["---", "---", "---"]),
+        ]
+        for rank in rank_ids:
+            rank_stats = roofline_stats.get(rank, {})
+            for metric in metrics:
+                unit = metric_units[metric]
+                value = (
+                    f"{rank_stats[metric]['value']:,.3f}{rank_stats[metric]['unit']}"
+                    if metric in rank_stats
+                    else "n/a"
+                )
+                lines.append(md_row([rank, metric, value]))
+    lines += [
         "",
         "## Flow-completion metrics",
         "",
@@ -521,20 +616,61 @@ def generate_report(result_dir: Path, output: Path, completion_log: Path | None,
         "This report describes one result directory. Supply separate 8-, 16-, and 32-rank result directories to compare scaling; rank count cannot be inferred reliably from the network output alone.",
         "",
     ]
-    output.write_text("\n".join(lines))
+    # Exclusive creation guarantees that a report path is never overwritten,
+    # including when two analyzer runs happen to choose the same timestamp.
+    with output.open("x", encoding="utf-8") as handle:
+        handle.write("\n".join(lines))
+
+
+def choose_output_path(results_dir: Path, requested: Path | None) -> Path:
+    """Choose a fresh Markdown path, preserving an explicit unused path."""
+    if requested is None:
+        parent = Path(__file__).resolve().parents[1] / "results"
+        parent.mkdir(parents=True, exist_ok=True)
+        stem = "report"
+        suffix = ".md"
+        add_timestamp = True
+    else:
+        parent = requested.parent
+        stem = requested.stem if requested.suffix else requested.name
+        suffix = requested.suffix or ".md"
+        add_timestamp = requested.exists()
+        if not add_timestamp:
+            return requested
+
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S_%f")
+    candidate = parent / f"{stem}_{timestamp}{suffix}"
+    counter = 1
+    while candidate.exists():
+        candidate = parent / f"{stem}_{timestamp}_{counter}{suffix}"
+        counter += 1
+    return candidate
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("results_dir", type=Path, help="Directory containing fct.txt, qlen.txt, pfc.txt, mix.tr, etc.")
-    parser.add_argument("-o", "--output", type=Path, help="Markdown report path (default: <results_dir>/report.md)")
-    parser.add_argument("--log", type=Path, help="ASTRA-sim stdout/spdlog file containing 'sys[i] finished' lines")
+    parser.add_argument(
+        "-o", "--output", type=Path,
+        help="Markdown report path (default: timestamped report in project results/; if it exists, a timestamped path is used)",
+    )
+    parser.add_argument(
+        "--log", type=Path,
+        help="ASTRA-sim stdout/spdlog file with completion lines and optional roofline statistics",
+    )
     parser.add_argument("--trace-record-size", type=int, default=TRACE_RECORD_SIZE, help="Binary mix.tr record size; default: 56")
     args = parser.parse_args()
     if not args.results_dir.is_dir():
         parser.error(f"result directory does not exist: {args.results_dir}")
-    output = args.output or (args.results_dir / "report.md")
-    generate_report(args.results_dir, output, args.log, args.trace_record_size)
+    output = choose_output_path(args.results_dir, args.output)
+    while True:
+        try:
+            generate_report(args.results_dir, output, args.log, args.trace_record_size)
+            break
+        except FileExistsError:
+            # Another run may have claimed the candidate between selection and
+            # file creation. Generate a fresh timestamped candidate and retry.
+            output = choose_output_path(args.results_dir, output)
     print(output)
 
 
