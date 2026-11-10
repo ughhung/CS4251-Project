@@ -7,9 +7,9 @@ Result directory: `astra-sim/extern/network_backend/ns-3/scratch/output`
 | Metric | Result |
 | --- | --- |
 | ASTRA workload ranks with completion log | 32 |
-| Total workload completion (cycles) | 491,351,929 |
-| Fastest rank completion (cycles) | 491,337,251 |
-| Maximum exposed communication (cycles) | 491,351,585 |
+| Total workload completion (cycles) | 75,759,828 |
+| Fastest rank completion (cycles) | 74,452,441 |
+| Maximum exposed communication (cycles) | 75,352,736 |
 | Completed network flows | 50,176 |
 | Total bytes sent | 9,525,264,384 |
 | Network-flow finish proxy | 75.739 ms |
@@ -22,143 +22,275 @@ Summary across ranks (arithmetic mean of ranks that logged each metric):
 
 | Metric | Mean | Minimum | Maximum | Ranks reported |
 | --- | --- | --- | --- | --- |
-| Comm time | 491,343,045.875 | 491,337,204.000 | 491,351,882.000 | 32 |
-| GPU time | 344.000 | 344.000 | 344.000 | 32 |
-| Total compute-communication overlap | 297.000 | 297.000 | 297.000 | 32 |
-| Wall time | 491,343,092.875 | 491,337,251.000 | 491,351,929.000 | 32 |
+| Average compute utilization (%) | 40.267% | 40.261% | 40.267% | 32 |
+| Average memory utilization (%) | 83.379% | 83.379% | 83.384% | 32 |
+| Average operation intensity | 3,183.455 | 3,182.148 | 3,183.497 | 32 |
+| Comm time | 74,841,247.438 | 74,056,069.000 | 75,651,720.000 | 32 |
+| Compute bound percentage (%) | 26.074% | 26.069% | 26.074% | 32 |
+| GPU time | 521,652.875 | 407,092.000 | 4,073,040.000 | 32 |
+| Total compute-communication overlap | 383,130.750 | 298,984.000 | 2,991,680.000 | 32 |
+| Wall time | 74,979,769.562 | 74,452,441.000 | 75,759,828.000 | 32 |
 
 Per-rank values:
 
 | Rank | Metric | Value |
 | --- | --- | --- |
-| 0 | Comm time | 491,346,503.000 |
-| 0 | GPU time | 344.000 |
-| 0 | Total compute-communication overlap | 297.000 |
-| 0 | Wall time | 491,346,550.000 |
-| 1 | Comm time | 491,340,566.000 |
-| 1 | GPU time | 344.000 |
-| 1 | Total compute-communication overlap | 297.000 |
-| 1 | Wall time | 491,340,613.000 |
-| 2 | Comm time | 491,337,204.000 |
-| 2 | GPU time | 344.000 |
-| 2 | Total compute-communication overlap | 297.000 |
-| 2 | Wall time | 491,337,251.000 |
-| 3 | Comm time | 491,341,730.000 |
-| 3 | GPU time | 344.000 |
-| 3 | Total compute-communication overlap | 297.000 |
-| 3 | Wall time | 491,341,777.000 |
-| 4 | Comm time | 491,338,794.000 |
-| 4 | GPU time | 344.000 |
-| 4 | Total compute-communication overlap | 297.000 |
-| 4 | Wall time | 491,338,841.000 |
-| 5 | Comm time | 491,341,153.000 |
-| 5 | GPU time | 344.000 |
-| 5 | Total compute-communication overlap | 297.000 |
-| 5 | Wall time | 491,341,200.000 |
-| 6 | Comm time | 491,346,535.000 |
-| 6 | GPU time | 344.000 |
-| 6 | Total compute-communication overlap | 297.000 |
-| 6 | Wall time | 491,346,582.000 |
-| 7 | Comm time | 491,351,882.000 |
-| 7 | GPU time | 344.000 |
-| 7 | Total compute-communication overlap | 297.000 |
-| 7 | Wall time | 491,351,929.000 |
-| 8 | Comm time | 491,346,503.000 |
-| 8 | GPU time | 344.000 |
-| 8 | Total compute-communication overlap | 297.000 |
-| 8 | Wall time | 491,346,550.000 |
-| 9 | Comm time | 491,340,566.000 |
-| 9 | GPU time | 344.000 |
-| 9 | Total compute-communication overlap | 297.000 |
-| 9 | Wall time | 491,340,613.000 |
-| 10 | Comm time | 491,337,204.000 |
-| 10 | GPU time | 344.000 |
-| 10 | Total compute-communication overlap | 297.000 |
-| 10 | Wall time | 491,337,251.000 |
-| 11 | Comm time | 491,341,730.000 |
-| 11 | GPU time | 344.000 |
-| 11 | Total compute-communication overlap | 297.000 |
-| 11 | Wall time | 491,341,777.000 |
-| 12 | Comm time | 491,338,794.000 |
-| 12 | GPU time | 344.000 |
-| 12 | Total compute-communication overlap | 297.000 |
-| 12 | Wall time | 491,338,841.000 |
-| 13 | Comm time | 491,341,153.000 |
-| 13 | GPU time | 344.000 |
-| 13 | Total compute-communication overlap | 297.000 |
-| 13 | Wall time | 491,341,200.000 |
-| 14 | Comm time | 491,346,535.000 |
-| 14 | GPU time | 344.000 |
-| 14 | Total compute-communication overlap | 297.000 |
-| 14 | Wall time | 491,346,582.000 |
-| 15 | Comm time | 491,351,882.000 |
-| 15 | GPU time | 344.000 |
-| 15 | Total compute-communication overlap | 297.000 |
-| 15 | Wall time | 491,351,929.000 |
-| 16 | Comm time | 491,346,503.000 |
-| 16 | GPU time | 344.000 |
-| 16 | Total compute-communication overlap | 297.000 |
-| 16 | Wall time | 491,346,550.000 |
-| 17 | Comm time | 491,340,566.000 |
-| 17 | GPU time | 344.000 |
-| 17 | Total compute-communication overlap | 297.000 |
-| 17 | Wall time | 491,340,613.000 |
-| 18 | Comm time | 491,337,204.000 |
-| 18 | GPU time | 344.000 |
-| 18 | Total compute-communication overlap | 297.000 |
-| 18 | Wall time | 491,337,251.000 |
-| 19 | Comm time | 491,341,730.000 |
-| 19 | GPU time | 344.000 |
-| 19 | Total compute-communication overlap | 297.000 |
-| 19 | Wall time | 491,341,777.000 |
-| 20 | Comm time | 491,338,794.000 |
-| 20 | GPU time | 344.000 |
-| 20 | Total compute-communication overlap | 297.000 |
-| 20 | Wall time | 491,338,841.000 |
-| 21 | Comm time | 491,341,153.000 |
-| 21 | GPU time | 344.000 |
-| 21 | Total compute-communication overlap | 297.000 |
-| 21 | Wall time | 491,341,200.000 |
-| 22 | Comm time | 491,346,535.000 |
-| 22 | GPU time | 344.000 |
-| 22 | Total compute-communication overlap | 297.000 |
-| 22 | Wall time | 491,346,582.000 |
-| 23 | Comm time | 491,351,882.000 |
-| 23 | GPU time | 344.000 |
-| 23 | Total compute-communication overlap | 297.000 |
-| 23 | Wall time | 491,351,929.000 |
-| 24 | Comm time | 491,346,503.000 |
-| 24 | GPU time | 344.000 |
-| 24 | Total compute-communication overlap | 297.000 |
-| 24 | Wall time | 491,346,550.000 |
-| 25 | Comm time | 491,340,566.000 |
-| 25 | GPU time | 344.000 |
-| 25 | Total compute-communication overlap | 297.000 |
-| 25 | Wall time | 491,340,613.000 |
-| 26 | Comm time | 491,337,204.000 |
-| 26 | GPU time | 344.000 |
-| 26 | Total compute-communication overlap | 297.000 |
-| 26 | Wall time | 491,337,251.000 |
-| 27 | Comm time | 491,341,730.000 |
-| 27 | GPU time | 344.000 |
-| 27 | Total compute-communication overlap | 297.000 |
-| 27 | Wall time | 491,341,777.000 |
-| 28 | Comm time | 491,338,794.000 |
-| 28 | GPU time | 344.000 |
-| 28 | Total compute-communication overlap | 297.000 |
-| 28 | Wall time | 491,338,841.000 |
-| 29 | Comm time | 491,341,153.000 |
-| 29 | GPU time | 344.000 |
-| 29 | Total compute-communication overlap | 297.000 |
-| 29 | Wall time | 491,341,200.000 |
-| 30 | Comm time | 491,346,535.000 |
-| 30 | GPU time | 344.000 |
-| 30 | Total compute-communication overlap | 297.000 |
-| 30 | Wall time | 491,346,582.000 |
-| 31 | Comm time | 491,351,882.000 |
-| 31 | GPU time | 344.000 |
-| 31 | Total compute-communication overlap | 297.000 |
-| 31 | Wall time | 491,351,929.000 |
+| 0 | Average compute utilization | 40.261% |
+| 0 | Average memory utilization | 83.384% |
+| 0 | Average operation intensity | 3,182.148 |
+| 0 | Comm time | 74,056,069.000 |
+| 0 | Compute bound percentage | 26.069% |
+| 0 | GPU time | 4,073,040.000 |
+| 0 | Total compute-communication overlap | 2,991,680.000 |
+| 0 | Wall time | 75,137,429.000 |
+| 1 | Average compute utilization | 40.267% |
+| 1 | Average memory utilization | 83.379% |
+| 1 | Average operation intensity | 3,183.497 |
+| 1 | Comm time | 74,700,054.000 |
+| 1 | Compute bound percentage | 26.074% |
+| 1 | GPU time | 407,092.000 |
+| 1 | Total compute-communication overlap | 298,984.000 |
+| 1 | Wall time | 74,808,162.000 |
+| 2 | Average compute utilization | 40.267% |
+| 2 | Average memory utilization | 83.379% |
+| 2 | Average operation intensity | 3,183.497 |
+| 2 | Comm time | 74,915,841.000 |
+| 2 | Compute bound percentage | 26.074% |
+| 2 | GPU time | 407,092.000 |
+| 2 | Total compute-communication overlap | 298,984.000 |
+| 2 | Wall time | 75,023,949.000 |
+| 3 | Average compute utilization | 40.267% |
+| 3 | Average memory utilization | 83.379% |
+| 3 | Average operation intensity | 3,183.497 |
+| 3 | Comm time | 75,177,035.000 |
+| 3 | Compute bound percentage | 26.074% |
+| 3 | GPU time | 407,092.000 |
+| 3 | Total compute-communication overlap | 298,984.000 |
+| 3 | Wall time | 75,285,143.000 |
+| 4 | Average compute utilization | 40.267% |
+| 4 | Average memory utilization | 83.379% |
+| 4 | Average operation intensity | 3,183.497 |
+| 4 | Comm time | 75,428,702.000 |
+| 4 | Compute bound percentage | 26.074% |
+| 4 | GPU time | 407,092.000 |
+| 4 | Total compute-communication overlap | 298,984.000 |
+| 4 | Wall time | 75,536,810.000 |
+| 5 | Average compute utilization | 40.267% |
+| 5 | Average memory utilization | 83.379% |
+| 5 | Average operation intensity | 3,183.497 |
+| 5 | Comm time | 75,651,720.000 |
+| 5 | Compute bound percentage | 26.074% |
+| 5 | GPU time | 407,092.000 |
+| 5 | Total compute-communication overlap | 298,984.000 |
+| 5 | Wall time | 75,759,828.000 |
+| 6 | Average compute utilization | 40.267% |
+| 6 | Average memory utilization | 83.379% |
+| 6 | Average operation intensity | 3,183.497 |
+| 6 | Comm time | 74,909,210.000 |
+| 6 | Compute bound percentage | 26.074% |
+| 6 | GPU time | 407,092.000 |
+| 6 | Total compute-communication overlap | 298,984.000 |
+| 6 | Wall time | 75,017,318.000 |
+| 7 | Average compute utilization | 40.267% |
+| 7 | Average memory utilization | 83.379% |
+| 7 | Average operation intensity | 3,183.497 |
+| 7 | Comm time | 74,649,207.000 |
+| 7 | Compute bound percentage | 26.074% |
+| 7 | GPU time | 407,092.000 |
+| 7 | Total compute-communication overlap | 298,984.000 |
+| 7 | Wall time | 74,757,315.000 |
+| 8 | Average compute utilization | 40.267% |
+| 8 | Average memory utilization | 83.379% |
+| 8 | Average operation intensity | 3,183.497 |
+| 8 | Comm time | 74,687,643.000 |
+| 8 | Compute bound percentage | 26.074% |
+| 8 | GPU time | 407,092.000 |
+| 8 | Total compute-communication overlap | 298,984.000 |
+| 8 | Wall time | 74,795,751.000 |
+| 9 | Average compute utilization | 40.267% |
+| 9 | Average memory utilization | 83.379% |
+| 9 | Average operation intensity | 3,183.497 |
+| 9 | Comm time | 74,365,777.000 |
+| 9 | Compute bound percentage | 26.074% |
+| 9 | GPU time | 407,092.000 |
+| 9 | Total compute-communication overlap | 298,984.000 |
+| 9 | Wall time | 74,473,885.000 |
+| 10 | Average compute utilization | 40.267% |
+| 10 | Average memory utilization | 83.379% |
+| 10 | Average operation intensity | 3,183.497 |
+| 10 | Comm time | 74,581,564.000 |
+| 10 | Compute bound percentage | 26.074% |
+| 10 | GPU time | 407,092.000 |
+| 10 | Total compute-communication overlap | 298,984.000 |
+| 10 | Wall time | 74,689,672.000 |
+| 11 | Average compute utilization | 40.267% |
+| 11 | Average memory utilization | 83.379% |
+| 11 | Average operation intensity | 3,183.497 |
+| 11 | Comm time | 74,842,758.000 |
+| 11 | Compute bound percentage | 26.074% |
+| 11 | GPU time | 407,092.000 |
+| 11 | Total compute-communication overlap | 298,984.000 |
+| 11 | Wall time | 74,950,866.000 |
+| 12 | Average compute utilization | 40.267% |
+| 12 | Average memory utilization | 83.379% |
+| 12 | Average operation intensity | 3,183.497 |
+| 12 | Comm time | 75,143,221.000 |
+| 12 | Compute bound percentage | 26.074% |
+| 12 | GPU time | 407,092.000 |
+| 12 | Total compute-communication overlap | 298,984.000 |
+| 12 | Wall time | 75,251,329.000 |
+| 13 | Average compute utilization | 40.267% |
+| 13 | Average memory utilization | 83.379% |
+| 13 | Average operation intensity | 3,183.497 |
+| 13 | Comm time | 75,494,362.000 |
+| 13 | Compute bound percentage | 26.074% |
+| 13 | GPU time | 407,092.000 |
+| 13 | Total compute-communication overlap | 298,984.000 |
+| 13 | Wall time | 75,602,470.000 |
+| 14 | Average compute utilization | 40.267% |
+| 14 | Average memory utilization | 83.379% |
+| 14 | Average operation intensity | 3,183.497 |
+| 14 | Comm time | 74,751,852.000 |
+| 14 | Compute bound percentage | 26.074% |
+| 14 | GPU time | 407,092.000 |
+| 14 | Total compute-communication overlap | 298,984.000 |
+| 14 | Wall time | 74,859,960.000 |
+| 15 | Average compute utilization | 40.267% |
+| 15 | Average memory utilization | 83.379% |
+| 15 | Average operation intensity | 3,183.497 |
+| 15 | Comm time | 74,363,726.000 |
+| 15 | Compute bound percentage | 26.074% |
+| 15 | GPU time | 407,092.000 |
+| 15 | Total compute-communication overlap | 298,984.000 |
+| 15 | Wall time | 74,471,834.000 |
+| 16 | Average compute utilization | 40.267% |
+| 16 | Average memory utilization | 83.379% |
+| 16 | Average operation intensity | 3,183.497 |
+| 16 | Comm time | 74,535,674.000 |
+| 16 | Compute bound percentage | 26.074% |
+| 16 | GPU time | 407,092.000 |
+| 16 | Total compute-communication overlap | 298,984.000 |
+| 16 | Wall time | 74,643,782.000 |
+| 17 | Average compute utilization | 40.267% |
+| 17 | Average memory utilization | 83.379% |
+| 17 | Average operation intensity | 3,183.497 |
+| 17 | Comm time | 74,395,170.000 |
+| 17 | Compute bound percentage | 26.074% |
+| 17 | GPU time | 407,092.000 |
+| 17 | Total compute-communication overlap | 298,984.000 |
+| 17 | Wall time | 74,503,278.000 |
+| 18 | Average compute utilization | 40.267% |
+| 18 | Average memory utilization | 83.379% |
+| 18 | Average operation intensity | 3,183.497 |
+| 18 | Comm time | 74,610,957.000 |
+| 18 | Compute bound percentage | 26.074% |
+| 18 | GPU time | 407,092.000 |
+| 18 | Total compute-communication overlap | 298,984.000 |
+| 18 | Wall time | 74,719,065.000 |
+| 19 | Average compute utilization | 40.267% |
+| 19 | Average memory utilization | 83.379% |
+| 19 | Average operation intensity | 3,183.497 |
+| 19 | Comm time | 74,872,151.000 |
+| 19 | Compute bound percentage | 26.074% |
+| 19 | GPU time | 407,092.000 |
+| 19 | Total compute-communication overlap | 298,984.000 |
+| 19 | Wall time | 74,980,259.000 |
+| 20 | Average compute utilization | 40.267% |
+| 20 | Average memory utilization | 83.379% |
+| 20 | Average operation intensity | 3,183.497 |
+| 20 | Comm time | 75,123,828.000 |
+| 20 | Compute bound percentage | 26.074% |
+| 20 | GPU time | 407,092.000 |
+| 20 | Total compute-communication overlap | 298,984.000 |
+| 20 | Wall time | 75,231,936.000 |
+| 21 | Average compute utilization | 40.267% |
+| 21 | Average memory utilization | 83.379% |
+| 21 | Average operation intensity | 3,183.497 |
+| 21 | Comm time | 75,342,393.000 |
+| 21 | Compute bound percentage | 26.074% |
+| 21 | GPU time | 407,092.000 |
+| 21 | Total compute-communication overlap | 298,984.000 |
+| 21 | Wall time | 75,450,501.000 |
+| 22 | Average compute utilization | 40.267% |
+| 22 | Average memory utilization | 83.379% |
+| 22 | Average operation intensity | 3,183.497 |
+| 22 | Comm time | 74,599,883.000 |
+| 22 | Compute bound percentage | 26.074% |
+| 22 | GPU time | 407,092.000 |
+| 22 | Total compute-communication overlap | 298,984.000 |
+| 22 | Wall time | 74,707,991.000 |
+| 23 | Average compute utilization | 40.267% |
+| 23 | Average memory utilization | 83.379% |
+| 23 | Average operation intensity | 3,183.497 |
+| 23 | Comm time | 74,344,333.000 |
+| 23 | Compute bound percentage | 26.074% |
+| 23 | GPU time | 407,092.000 |
+| 23 | Total compute-communication overlap | 298,984.000 |
+| 23 | Wall time | 74,452,441.000 |
+| 24 | Average compute utilization | 40.267% |
+| 24 | Average memory utilization | 83.379% |
+| 24 | Average operation intensity | 3,183.497 |
+| 24 | Comm time | 74,731,837.000 |
+| 24 | Compute bound percentage | 26.074% |
+| 24 | GPU time | 407,092.000 |
+| 24 | Total compute-communication overlap | 298,984.000 |
+| 24 | Wall time | 74,839,945.000 |
+| 25 | Average compute utilization | 40.267% |
+| 25 | Average memory utilization | 83.379% |
+| 25 | Average operation intensity | 3,183.497 |
+| 25 | Comm time | 74,587,956.000 |
+| 25 | Compute bound percentage | 26.074% |
+| 25 | GPU time | 407,092.000 |
+| 25 | Total compute-communication overlap | 298,984.000 |
+| 25 | Wall time | 74,696,064.000 |
+| 26 | Average compute utilization | 40.267% |
+| 26 | Average memory utilization | 83.379% |
+| 26 | Average operation intensity | 3,183.497 |
+| 26 | Comm time | 74,803,743.000 |
+| 26 | Compute bound percentage | 26.074% |
+| 26 | GPU time | 407,092.000 |
+| 26 | Total compute-communication overlap | 298,984.000 |
+| 26 | Wall time | 74,911,851.000 |
+| 27 | Average compute utilization | 40.267% |
+| 27 | Average memory utilization | 83.379% |
+| 27 | Average operation intensity | 3,183.497 |
+| 27 | Comm time | 75,064,937.000 |
+| 27 | Compute bound percentage | 26.074% |
+| 27 | GPU time | 407,092.000 |
+| 27 | Total compute-communication overlap | 298,984.000 |
+| 27 | Wall time | 75,173,045.000 |
+| 28 | Average compute utilization | 40.267% |
+| 28 | Average memory utilization | 83.379% |
+| 28 | Average operation intensity | 3,183.497 |
+| 28 | Comm time | 75,316,604.000 |
+| 28 | Compute bound percentage | 26.074% |
+| 28 | GPU time | 407,092.000 |
+| 28 | Total compute-communication overlap | 298,984.000 |
+| 28 | Wall time | 75,424,712.000 |
+| 29 | Average compute utilization | 40.267% |
+| 29 | Average memory utilization | 83.379% |
+| 29 | Average operation intensity | 3,183.497 |
+| 29 | Comm time | 75,538,556.000 |
+| 29 | Compute bound percentage | 26.074% |
+| 29 | GPU time | 407,092.000 |
+| 29 | Total compute-communication overlap | 298,984.000 |
+| 29 | Wall time | 75,646,664.000 |
+| 30 | Average compute utilization | 40.267% |
+| 30 | Average memory utilization | 83.379% |
+| 30 | Average operation intensity | 3,183.497 |
+| 30 | Comm time | 74,796,046.000 |
+| 30 | Compute bound percentage | 26.074% |
+| 30 | GPU time | 407,092.000 |
+| 30 | Total compute-communication overlap | 298,984.000 |
+| 30 | Wall time | 74,904,154.000 |
+| 31 | Average compute utilization | 40.267% |
+| 31 | Average memory utilization | 83.379% |
+| 31 | Average operation intensity | 3,183.497 |
+| 31 | Comm time | 74,537,109.000 |
+| 31 | Compute bound percentage | 26.074% |
+| 31 | GPU time | 407,092.000 |
+| 31 | Total compute-communication overlap | 298,984.000 |
+| 31 | Wall time | 74,645,217.000 |
 
 ## Flow-completion metrics
 
