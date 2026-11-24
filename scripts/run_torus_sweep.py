@@ -144,6 +144,14 @@ def stamp() -> str:
     return datetime.now().astimezone().isoformat()
 
 
+def print_status(message: str, *, run: tuple[int, int] | None = None, file=None) -> None:
+    prefix = f"[{stamp()}]"
+    if run is not None:
+        prefix += f" [run {run[0]}/{run[1]}]"
+    print("\n".join(f"{prefix} {line}" for line in message.splitlines()),
+          file=file, flush=True)
+
+
 def record(journal, event: str, **fields) -> None:
     journal.write(json.dumps({"event": event, "time": stamp(), **fields}) + "\n")
     journal.flush()
@@ -342,13 +350,13 @@ def existing_reports(results: Path, plan) -> dict:
     return reports
 
 
-def run_one(container: str, topo: Topology, workload, batch: Path, journal, outcomes):
+def run_one(container: str, topo: Topology, workload, batch: Path, journal, outcomes, *, run):
     label, directory, prefix = workload
-    fields = {"topology": topo.name, "trace": label}
+    fields = {"topology": topo.name, "trace": label, "run_number": run[0], "total_runs": run[1]}
     key = (topo.name, label)
     run_dir = batch / f"{label}_{topo.name}"
     run_dir.mkdir()
-    print(f"Running {label} on {topo.name}", flush=True)
+    print_status(f"Running {label} on {topo.name}", run=run)
     old_logs = log_state()
     outputs = [OUTPUT / name for name in ("fct.txt", "qlen.txt", "pfc.txt", "mix.tr")]
     old_outputs = {path: file_state(path) for path in outputs}
@@ -363,7 +371,7 @@ def run_one(container: str, topo: Topology, workload, batch: Path, journal, outc
     def finish(status, **details):
         record(journal, "analysis_finished", **fields, status=status, **details)
         outcomes[key] = status if exit_code == 0 else "simulation_failed"
-        print(f"{label} on {topo.name}: {status}", flush=True)
+        print_status(f"{label} on {topo.name}: {status}", run=run)
 
     if exit_code:
         finish("skipped", reason=f"Simulator exited with status {exit_code}")
@@ -418,12 +426,13 @@ def run_sweep(container: str, topologies: list[Topology], results: Path, reports
         else:
             original[path] = None
     plan = [(topo.name, label) for topo in topologies for label, _, _ in WORKLOADS]
+    run_numbers = {key: (number, len(plan)) for number, key in enumerate(plan, 1)}
     outcomes = dict.fromkeys(plan, "not_started")
     journal_path = batch.with_suffix(".jsonl")
     with journal_path.open("x") as journal:
         record(journal, "planned", runs=[{"topology": topo, "trace": label}
                                        for topo, label in plan])
-        print(f"Progress journal: {journal_path}", flush=True)
+        print_status(f"Progress journal: {journal_path}")
         interrupted = False
         try:
             for topo in topologies:
@@ -435,9 +444,11 @@ def run_sweep(container: str, topologies: list[Topology], results: Path, reports
                         pending.append(workload)
                         continue
                     outcomes[topo.name, label] = "already_reported"
+                    run = run_numbers[topo.name, label]
                     record(journal, "run_skipped", topology=topo.name, trace=label,
+                           run_number=run[0], total_runs=run[1],
                            reason="Report already exists", report=str(report))
-                    print(f"Skipping {label} on {topo.name}: {report.name} exists", flush=True)
+                    print_status(f"Skipping {label} on {topo.name}: {report.name} exists", run=run)
                 if not pending:
                     continue
                 try:
@@ -445,27 +456,36 @@ def run_sweep(container: str, topologies: list[Topology], results: Path, reports
                 except (OSError, ValueError, subprocess.SubprocessError) as error:
                     for label, _, _ in pending:
                         outcomes[topo.name, label] = "skipped"
+                        run = run_numbers[topo.name, label]
                         record(journal, "run_skipped", topology=topo.name, trace=label,
+                               run_number=run[0], total_runs=run[1],
                                reason=f"Topology setup failed: {error}")
+                        print_status(f"Skipping {label} on {topo.name}: {error}", run=run, file=sys.stderr)
                     continue
                 for workload in pending:
                     label = workload[0]
                     key = (topo.name, label)
+                    run = run_numbers[key]
                     try:
-                        run_one(container, topo, workload, batch, journal, outcomes)
+                        run_one(container, topo, workload, batch, journal, outcomes, run=run)
                     except KeyboardInterrupt:
                         record(journal, "run_interrupted", topology=topo.name, trace=label,
+                               run_number=run[0], total_runs=run[1],
                                previous_status=outcomes[key])
+                        print_status(f"Interrupted {label} on {topo.name}", run=run)
                         raise
                     except (OSError, ValueError, subprocess.SubprocessError) as error:
                         previous = outcomes[key]
                         outcomes[key] = "failed"
                         if previous == "analysis_pending":
                             record(journal, "analysis_finished", topology=topo.name, trace=label,
+                                   run_number=run[0], total_runs=run[1],
                                    status="failed", reason=str(error))
                         else:
                             record(journal, "run_error", topology=topo.name, trace=label,
+                                   run_number=run[0], total_runs=run[1],
                                    previous_status=previous, reason=str(error))
+                        print_status(f"{label} on {topo.name}: {error}", run=run, file=sys.stderr)
         except KeyboardInterrupt:
             interrupted = True
         finally:
@@ -482,9 +502,9 @@ def run_sweep(container: str, topologies: list[Topology], results: Path, reports
                       for status in sorted(set(outcomes.values()))}
             record(journal, "summary", interrupted=interrupted, counts=counts,
                    restore_errors=restore_errors)
-            print(json.dumps(counts), flush=True)
+            print_status(json.dumps(counts))
             for error in restore_errors:
-                print(f"Restore failed: {error}", file=sys.stderr)
+                print_status(f"Restore failed: {error}", file=sys.stderr)
     if interrupted:
         return 130
     completed = counts.get("success", 0) + counts.get("already_reported", 0)
@@ -505,14 +525,16 @@ def main() -> int:
         plan = [(topo.name, label) for topo in topologies for label, _, _ in WORKLOADS]
         if args.dry_run:
             reports = existing_reports(results, plan) if args.missing_only else {}
-            for topo in topologies:
-                for label, directory, prefix in WORKLOADS:
-                    if (topo.name, label) in reports:
-                        continue
-                    print(topo.name, label, workload_path(directory, prefix).relative_to(PROJECT),
-                          topo.logical.relative_to(PROJECT), topo.system.relative_to(PROJECT))
-            print(f"{len(topologies)} topologies, {len(plan) - len(reports)} runs, "
-                  f"{len(reports)} existing reports skipped")
+            jobs = ((topo, workload) for topo in topologies for workload in WORKLOADS)
+            for number, (topo, (label, directory, prefix)) in enumerate(jobs, 1):
+                if (topo.name, label) in reports:
+                    continue
+                workload = workload_path(directory, prefix).relative_to(PROJECT)
+                print_status(f"{topo.name} {label} {workload} "
+                             f"{topo.logical.relative_to(PROJECT)} {topo.system.relative_to(PROJECT)}",
+                             run=(number, len(plan)))
+            print_status(f"{len(topologies)} topologies, {len(plan) - len(reports)} runs, "
+                         f"{len(reports)} existing reports skipped")
             return 0
         results.mkdir(exist_ok=True)
         with (results / ".torus_sweep.lock").open("a") as lock:
@@ -523,7 +545,7 @@ def main() -> int:
             reports = existing_reports(results, plan) if args.missing_only else {}
             pending = [(topology, trace) for topology, trace in plan if (topology, trace) not in reports]
             if not pending:
-                print(f"All {len(plan)} runs already have reports in {results}.", flush=True)
+                print_status(f"All {len(plan)} runs already have reports in {results}.")
                 return 0
             pending_topologies = {topology for topology, _ in pending}
             pending_traces = {trace for _, trace in pending}
@@ -531,7 +553,7 @@ def main() -> int:
                       args.container, [workload for workload in WORKLOADS if workload[0] in pending_traces])
             return run_sweep(args.container, topologies, results, reports)
     except (OSError, ValueError, subprocess.SubprocessError) as error:
-        print(f"Torus sweep could not proceed: {error}", file=sys.stderr)
+        print_status(f"Torus sweep could not proceed: {error}", file=sys.stderr)
         return 1
 
 
