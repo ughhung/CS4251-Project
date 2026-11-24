@@ -1,0 +1,492 @@
+ASTRA-sim + NS3
+There are 32 npus: 4,8,
+[2026-11-24 14:17:58.046] [system::topology::RingTopology] [info] ring of node 0, id: 0 dimension: local total nodes in ring: 4 index in ring: 0 offset: 1 total nodes in ring: 4
+[2026-11-24 14:17:58.046] [system::topology::RingTopology] [info] ring of node 0, id: 0 dimension: local total nodes in ring: 8 index in ring: 0 offset: 4 total nodes in ring: 8
+[2026-11-24 14:17:58.046] [system::topology::RingTopology] [info] ring of node 0, id: 0 dimension: local total nodes in ring: 4 index in ring: 0 offset: 1 total nodes in ring: 4
+[2026-11-24 14:17:58.046] [system::topology::RingTopology] [info] ring of node 0, id: 0 dimension: local total nodes in ring: 8 index in ring: 0 offset: 4 total nodes in ring: 8
+[2026-11-24 14:17:58.046] [system::topology::RingTopology] [info] ring of node 0, id: 0 dimension: local total nodes in ring: 4 index in ring: 0 offset: 1 total nodes in ring: 4
+[2026-11-24 14:17:58.046] [system::topology::RingTopology] [info] ring of node 0, id: 0 dimension: local total nodes in ring: 8 index in ring: 0 offset: 4 total nodes in ring: 8
+[2026-11-24 14:17:58.046] [system::topology::RingTopology] [info] ring of node 0, id: 0 dimension: local total nodes in ring: 4 index in ring: 0 offset: 1 total nodes in ring: 4
+[2026-11-24 14:17:58.046] [system::topology::RingTopology] [info] ring of node 0, id: 0 dimension: local total nodes in ring: 8 index in ring: 0 offset: 4 total nodes in ring: 8
+QP is enabled 
+maxRtt=6240 maxBdp=156000
+[2026-11-24 14:17:59.841] [system::topology::RingTopology] [info] custom ring, id: 0, dimension: local total nodes in ring: 4 index in ring: 0 total nodes in ring 4
+[2026-11-24 14:17:59.841] [system::topology::RingTopology] [info] custom ring, id: 1, dimension: local total nodes in ring: 4 index in ring: 0 total nodes in ring 4
+[2026-11-24 14:17:59.841] [system::topology::RingTopology] [info] custom ring, id: 2, dimension: local total nodes in ring: 4 index in ring: 0 total nodes in ring 4
+[2026-11-24 14:17:59.841] [system::topology::RingTopology] [info] custom ring, id: 3, dimension: local total nodes in ring: 4 index in ring: 0 total nodes in ring 4
+[2026-11-24 14:17:59.841] [system::topology::RingTopology] [info] custom ring, id: 4, dimension: local total nodes in ring: 4 index in ring: 0 total nodes in ring 4
+[2026-11-24 14:17:59.841] [system::topology::RingTopology] [info] custom ring, id: 5, dimension: local total nodes in ring: 4 index in ring: 0 total nodes in ring 4
+[2026-11-24 14:17:59.841] [system::topology::RingTopology] [info] custom ring, id: 6, dimension: local total nodes in ring: 4 index in ring: 0 total nodes in ring 4
+[2026-11-24 14:17:59.841] [system::topology::RingTopology] [info] custom ring, id: 7, dimension: local total nodes in ring: 4 index in ring: 0 total nodes in ring 4
+[2026-11-24 14:17:59.841] [system::topology::RingTopology] [info] custom ring, id: 8, dimension: local total nodes in ring: 4 index in ring: 1 total nodes in ring 4
+[2026-11-24 14:17:59.841] [system::topology::RingTopology] [info] custom ring, id: 9, dimension: local total nodes in ring: 4 index in ring: 1 total nodes in ring 4
+[2026-11-24 14:17:59.841] [system::topology::RingTopology] [info] custom ring, id: 10, dimension: local total nodes in ring: 4 index in ring: 1 total nodes in ring 4
+[2026-11-24 14:17:59.841] [system::topology::RingTopology] [info] custom ring, id: 11, dimension: local total nodes in ring: 4 index in ring: 1 total nodes in ring 4
+[2026-11-24 14:17:59.842] [system::topology::RingTopology] [info] custom ring, id: 12, dimension: local total nodes in ring: 4 index in ring: 1 total nodes in ring 4
+[2026-11-24 14:17:59.842] [system::topology::RingTopology] [info] custom ring, id: 13, dimension: local total nodes in ring: 4 index in ring: 1 total nodes in ring 4
+[2026-11-24 14:17:59.842] [system::topology::RingTopology] [info] custom ring, id: 14, dimension: local total nodes in ring: 4 index in ring: 1 total nodes in ring 4
+[2026-11-24 14:17:59.842] [system::topology::RingTopology] [info] custom ring, id: 15, dimension: local total nodes in ring: 4 index in ring: 1 total nodes in ring 4
+[2026-11-24 14:17:59.842] [system::topology::RingTopology] [info] custom ring, id: 16, dimension: local total nodes in ring: 4 index in ring: 2 total nodes in ring 4
+[2026-11-24 14:17:59.842] [system::topology::RingTopology] [info] custom ring, id: 17, dimension: local total nodes in ring: 4 index in ring: 2 total nodes in ring 4
+[2026-11-24 14:17:59.842] [system::topology::RingTopology] [info] custom ring, id: 18, dimension: local total nodes in ring: 4 index in ring: 2 total nodes in ring 4
+[2026-11-24 14:17:59.842] [system::topology::RingTopology] [info] custom ring, id: 19, dimension: local total nodes in ring: 4 index in ring: 2 total nodes in ring 4
+[2026-11-24 14:17:59.842] [system::topology::RingTopology] [info] custom ring, id: 20, dimension: local total nodes in ring: 4 index in ring: 2 total nodes in ring 4
+[2026-11-24 14:17:59.842] [system::topology::RingTopology] [info] custom ring, id: 21, dimension: local total nodes in ring: 4 index in ring: 2 total nodes in ring 4
+[2026-11-24 14:17:59.842] [system::topology::RingTopology] [info] custom ring, id: 22, dimension: local total nodes in ring: 4 index in ring: 2 total nodes in ring 4
+[2026-11-24 14:17:59.842] [system::topology::RingTopology] [info] custom ring, id: 23, dimension: local total nodes in ring: 4 index in ring: 2 total nodes in ring 4
+[2026-11-24 14:17:59.842] [system::topology::RingTopology] [info] custom ring, id: 24, dimension: local total nodes in ring: 4 index in ring: 3 total nodes in ring 4
+[2026-11-24 14:17:59.842] [system::topology::RingTopology] [info] custom ring, id: 25, dimension: local total nodes in ring: 4 index in ring: 3 total nodes in ring 4
+[2026-11-24 14:17:59.842] [system::topology::RingTopology] [info] custom ring, id: 26, dimension: local total nodes in ring: 4 index in ring: 3 total nodes in ring 4
+[2026-11-24 14:17:59.842] [system::topology::RingTopology] [info] custom ring, id: 27, dimension: local total nodes in ring: 4 index in ring: 3 total nodes in ring 4
+[2026-11-24 14:17:59.843] [system::topology::RingTopology] [info] custom ring, id: 28, dimension: local total nodes in ring: 4 index in ring: 3 total nodes in ring 4
+[2026-11-24 14:17:59.843] [system::topology::RingTopology] [info] custom ring, id: 29, dimension: local total nodes in ring: 4 index in ring: 3 total nodes in ring 4
+[2026-11-24 14:17:59.843] [system::topology::RingTopology] [info] custom ring, id: 30, dimension: local total nodes in ring: 4 index in ring: 3 total nodes in ring 4
+[2026-11-24 14:17:59.843] [system::topology::RingTopology] [info] custom ring, id: 31, dimension: local total nodes in ring: 4 index in ring: 3 total nodes in ring 4
+[2026-11-24 14:18:00.982] [system::topology::RingTopology] [info] custom ring, id: 8, dimension: local total nodes in ring: 4 index in ring: 1 total nodes in ring 4
+[2026-11-24 14:18:00.982] [system::topology::RingTopology] [info] custom ring, id: 9, dimension: local total nodes in ring: 4 index in ring: 1 total nodes in ring 4
+[2026-11-24 14:18:00.982] [system::topology::RingTopology] [info] custom ring, id: 10, dimension: local total nodes in ring: 4 index in ring: 1 total nodes in ring 4
+[2026-11-24 14:18:00.982] [system::topology::RingTopology] [info] custom ring, id: 11, dimension: local total nodes in ring: 4 index in ring: 1 total nodes in ring 4
+[2026-11-24 14:18:00.982] [system::topology::RingTopology] [info] custom ring, id: 12, dimension: local total nodes in ring: 4 index in ring: 1 total nodes in ring 4
+[2026-11-24 14:18:00.982] [system::topology::RingTopology] [info] custom ring, id: 13, dimension: local total nodes in ring: 4 index in ring: 1 total nodes in ring 4
+[2026-11-24 14:18:00.982] [system::topology::RingTopology] [info] custom ring, id: 14, dimension: local total nodes in ring: 4 index in ring: 1 total nodes in ring 4
+[2026-11-24 14:18:00.982] [system::topology::RingTopology] [info] custom ring, id: 15, dimension: local total nodes in ring: 4 index in ring: 1 total nodes in ring 4
+[2026-11-24 14:18:00.984] [system::topology::RingTopology] [info] custom ring, id: 0, dimension: local total nodes in ring: 4 index in ring: 0 total nodes in ring 4
+[2026-11-24 14:18:00.984] [system::topology::RingTopology] [info] custom ring, id: 1, dimension: local total nodes in ring: 4 index in ring: 0 total nodes in ring 4
+[2026-11-24 14:18:00.985] [system::topology::RingTopology] [info] custom ring, id: 2, dimension: local total nodes in ring: 4 index in ring: 0 total nodes in ring 4
+[2026-11-24 14:18:00.985] [system::topology::RingTopology] [info] custom ring, id: 3, dimension: local total nodes in ring: 4 index in ring: 0 total nodes in ring 4
+[2026-11-24 14:18:00.985] [system::topology::RingTopology] [info] custom ring, id: 4, dimension: local total nodes in ring: 4 index in ring: 0 total nodes in ring 4
+[2026-11-24 14:18:00.985] [system::topology::RingTopology] [info] custom ring, id: 5, dimension: local total nodes in ring: 4 index in ring: 0 total nodes in ring 4
+[2026-11-24 14:18:00.985] [system::topology::RingTopology] [info] custom ring, id: 6, dimension: local total nodes in ring: 4 index in ring: 0 total nodes in ring 4
+[2026-11-24 14:18:00.985] [system::topology::RingTopology] [info] custom ring, id: 7, dimension: local total nodes in ring: 4 index in ring: 0 total nodes in ring 4
+[2026-11-24 14:18:00.986] [system::topology::RingTopology] [info] custom ring, id: 16, dimension: local total nodes in ring: 4 index in ring: 2 total nodes in ring 4
+[2026-11-24 14:18:00.986] [system::topology::RingTopology] [info] custom ring, id: 17, dimension: local total nodes in ring: 4 index in ring: 2 total nodes in ring 4
+[2026-11-24 14:18:00.986] [system::topology::RingTopology] [info] custom ring, id: 18, dimension: local total nodes in ring: 4 index in ring: 2 total nodes in ring 4
+[2026-11-24 14:18:00.986] [system::topology::RingTopology] [info] custom ring, id: 19, dimension: local total nodes in ring: 4 index in ring: 2 total nodes in ring 4
+[2026-11-24 14:18:00.986] [system::topology::RingTopology] [info] custom ring, id: 20, dimension: local total nodes in ring: 4 index in ring: 2 total nodes in ring 4
+[2026-11-24 14:18:00.986] [system::topology::RingTopology] [info] custom ring, id: 21, dimension: local total nodes in ring: 4 index in ring: 2 total nodes in ring 4
+[2026-11-24 14:18:00.986] [system::topology::RingTopology] [info] custom ring, id: 22, dimension: local total nodes in ring: 4 index in ring: 2 total nodes in ring 4
+[2026-11-24 14:18:00.986] [system::topology::RingTopology] [info] custom ring, id: 23, dimension: local total nodes in ring: 4 index in ring: 2 total nodes in ring 4
+[2026-11-24 14:18:00.996] [system::topology::RingTopology] [info] custom ring, id: 24, dimension: local total nodes in ring: 4 index in ring: 3 total nodes in ring 4
+[2026-11-24 14:18:00.996] [system::topology::RingTopology] [info] custom ring, id: 25, dimension: local total nodes in ring: 4 index in ring: 3 total nodes in ring 4
+[2026-11-24 14:18:00.996] [system::topology::RingTopology] [info] custom ring, id: 26, dimension: local total nodes in ring: 4 index in ring: 3 total nodes in ring 4
+[2026-11-24 14:18:00.996] [system::topology::RingTopology] [info] custom ring, id: 27, dimension: local total nodes in ring: 4 index in ring: 3 total nodes in ring 4
+[2026-11-24 14:18:00.996] [system::topology::RingTopology] [info] custom ring, id: 28, dimension: local total nodes in ring: 4 index in ring: 3 total nodes in ring 4
+[2026-11-24 14:18:00.996] [system::topology::RingTopology] [info] custom ring, id: 29, dimension: local total nodes in ring: 4 index in ring: 3 total nodes in ring 4
+[2026-11-24 14:18:00.996] [system::topology::RingTopology] [info] custom ring, id: 30, dimension: local total nodes in ring: 4 index in ring: 3 total nodes in ring 4
+[2026-11-24 14:18:00.996] [system::topology::RingTopology] [info] custom ring, id: 31, dimension: local total nodes in ring: 4 index in ring: 3 total nodes in ring 4
+[2026-11-24 14:18:12.747] [system::topology::RingTopology] [info] custom ring, id: 8, dimension: local total nodes in ring: 8 index in ring: 0 total nodes in ring 8
+[2026-11-24 14:18:12.747] [system::topology::RingTopology] [info] custom ring, id: 9, dimension: local total nodes in ring: 8 index in ring: 1 total nodes in ring 8
+[2026-11-24 14:18:12.748] [system::topology::RingTopology] [info] custom ring, id: 10, dimension: local total nodes in ring: 8 index in ring: 2 total nodes in ring 8
+[2026-11-24 14:18:12.748] [system::topology::RingTopology] [info] custom ring, id: 11, dimension: local total nodes in ring: 8 index in ring: 3 total nodes in ring 8
+[2026-11-24 14:18:12.748] [system::topology::RingTopology] [info] custom ring, id: 12, dimension: local total nodes in ring: 8 index in ring: 4 total nodes in ring 8
+[2026-11-24 14:18:12.748] [system::topology::RingTopology] [info] custom ring, id: 13, dimension: local total nodes in ring: 8 index in ring: 5 total nodes in ring 8
+[2026-11-24 14:18:12.748] [system::topology::RingTopology] [info] custom ring, id: 14, dimension: local total nodes in ring: 8 index in ring: 6 total nodes in ring 8
+[2026-11-24 14:18:12.748] [system::topology::RingTopology] [info] custom ring, id: 15, dimension: local total nodes in ring: 8 index in ring: 7 total nodes in ring 8
+[2026-11-24 14:18:12.766] [system::topology::RingTopology] [info] custom ring, id: 0, dimension: local total nodes in ring: 8 index in ring: 0 total nodes in ring 8
+[2026-11-24 14:18:12.766] [system::topology::RingTopology] [info] custom ring, id: 1, dimension: local total nodes in ring: 8 index in ring: 1 total nodes in ring 8
+[2026-11-24 14:18:12.767] [system::topology::RingTopology] [info] custom ring, id: 2, dimension: local total nodes in ring: 8 index in ring: 2 total nodes in ring 8
+[2026-11-24 14:18:12.767] [system::topology::RingTopology] [info] custom ring, id: 3, dimension: local total nodes in ring: 8 index in ring: 3 total nodes in ring 8
+[2026-11-24 14:18:12.767] [system::topology::RingTopology] [info] custom ring, id: 4, dimension: local total nodes in ring: 8 index in ring: 4 total nodes in ring 8
+[2026-11-24 14:18:12.767] [system::topology::RingTopology] [info] custom ring, id: 5, dimension: local total nodes in ring: 8 index in ring: 5 total nodes in ring 8
+[2026-11-24 14:18:12.767] [system::topology::RingTopology] [info] custom ring, id: 6, dimension: local total nodes in ring: 8 index in ring: 6 total nodes in ring 8
+[2026-11-24 14:18:12.767] [system::topology::RingTopology] [info] custom ring, id: 7, dimension: local total nodes in ring: 8 index in ring: 7 total nodes in ring 8
+[2026-11-24 14:18:12.779] [system::topology::RingTopology] [info] custom ring, id: 17, dimension: local total nodes in ring: 8 index in ring: 1 total nodes in ring 8
+[2026-11-24 14:18:12.779] [system::topology::RingTopology] [info] custom ring, id: 18, dimension: local total nodes in ring: 8 index in ring: 2 total nodes in ring 8
+[2026-11-24 14:18:12.779] [system::topology::RingTopology] [info] custom ring, id: 19, dimension: local total nodes in ring: 8 index in ring: 3 total nodes in ring 8
+[2026-11-24 14:18:12.779] [system::topology::RingTopology] [info] custom ring, id: 20, dimension: local total nodes in ring: 8 index in ring: 4 total nodes in ring 8
+[2026-11-24 14:18:12.779] [system::topology::RingTopology] [info] custom ring, id: 21, dimension: local total nodes in ring: 8 index in ring: 5 total nodes in ring 8
+[2026-11-24 14:18:12.779] [system::topology::RingTopology] [info] custom ring, id: 22, dimension: local total nodes in ring: 8 index in ring: 6 total nodes in ring 8
+[2026-11-24 14:18:12.779] [system::topology::RingTopology] [info] custom ring, id: 23, dimension: local total nodes in ring: 8 index in ring: 7 total nodes in ring 8
+[2026-11-24 14:18:12.779] [system::topology::RingTopology] [info] custom ring, id: 16, dimension: local total nodes in ring: 8 index in ring: 0 total nodes in ring 8
+[2026-11-24 14:18:12.786] [system::topology::RingTopology] [info] custom ring, id: 24, dimension: local total nodes in ring: 8 index in ring: 0 total nodes in ring 8
+[2026-11-24 14:18:12.786] [system::topology::RingTopology] [info] custom ring, id: 25, dimension: local total nodes in ring: 8 index in ring: 1 total nodes in ring 8
+[2026-11-24 14:18:12.786] [system::topology::RingTopology] [info] custom ring, id: 26, dimension: local total nodes in ring: 8 index in ring: 2 total nodes in ring 8
+[2026-11-24 14:18:12.786] [system::topology::RingTopology] [info] custom ring, id: 27, dimension: local total nodes in ring: 8 index in ring: 3 total nodes in ring 8
+[2026-11-24 14:18:12.786] [system::topology::RingTopology] [info] custom ring, id: 28, dimension: local total nodes in ring: 8 index in ring: 4 total nodes in ring 8
+[2026-11-24 14:18:12.786] [system::topology::RingTopology] [info] custom ring, id: 29, dimension: local total nodes in ring: 8 index in ring: 5 total nodes in ring 8
+[2026-11-24 14:18:12.787] [system::topology::RingTopology] [info] custom ring, id: 30, dimension: local total nodes in ring: 8 index in ring: 6 total nodes in ring 8
+[2026-11-24 14:18:12.787] [system::topology::RingTopology] [info] custom ring, id: 31, dimension: local total nodes in ring: 8 index in ring: 7 total nodes in ring 8
+[2026-11-24 14:20:26.570] [system::topology::RingTopology] [info] custom ring, id: 8, dimension: local total nodes in ring: 4 index in ring: 1 total nodes in ring 4
+[2026-11-24 14:20:26.571] [system::topology::RingTopology] [info] custom ring, id: 9, dimension: local total nodes in ring: 4 index in ring: 1 total nodes in ring 4
+[2026-11-24 14:20:26.571] [system::topology::RingTopology] [info] custom ring, id: 10, dimension: local total nodes in ring: 4 index in ring: 1 total nodes in ring 4
+[2026-11-24 14:20:26.571] [system::topology::RingTopology] [info] custom ring, id: 11, dimension: local total nodes in ring: 4 index in ring: 1 total nodes in ring 4
+[2026-11-24 14:20:26.571] [system::topology::RingTopology] [info] custom ring, id: 12, dimension: local total nodes in ring: 4 index in ring: 1 total nodes in ring 4
+[2026-11-24 14:20:26.571] [system::topology::RingTopology] [info] custom ring, id: 13, dimension: local total nodes in ring: 4 index in ring: 1 total nodes in ring 4
+[2026-11-24 14:20:26.571] [system::topology::RingTopology] [info] custom ring, id: 14, dimension: local total nodes in ring: 4 index in ring: 1 total nodes in ring 4
+[2026-11-24 14:20:26.571] [system::topology::RingTopology] [info] custom ring, id: 15, dimension: local total nodes in ring: 4 index in ring: 1 total nodes in ring 4
+[2026-11-24 14:20:26.590] [system::topology::RingTopology] [info] custom ring, id: 0, dimension: local total nodes in ring: 4 index in ring: 0 total nodes in ring 4
+[2026-11-24 14:20:26.590] [system::topology::RingTopology] [info] custom ring, id: 1, dimension: local total nodes in ring: 4 index in ring: 0 total nodes in ring 4
+[2026-11-24 14:20:26.590] [system::topology::RingTopology] [info] custom ring, id: 2, dimension: local total nodes in ring: 4 index in ring: 0 total nodes in ring 4
+[2026-11-24 14:20:26.590] [system::topology::RingTopology] [info] custom ring, id: 3, dimension: local total nodes in ring: 4 index in ring: 0 total nodes in ring 4
+[2026-11-24 14:20:26.590] [system::topology::RingTopology] [info] custom ring, id: 4, dimension: local total nodes in ring: 4 index in ring: 0 total nodes in ring 4
+[2026-11-24 14:20:26.590] [system::topology::RingTopology] [info] custom ring, id: 5, dimension: local total nodes in ring: 4 index in ring: 0 total nodes in ring 4
+[2026-11-24 14:20:26.590] [system::topology::RingTopology] [info] custom ring, id: 6, dimension: local total nodes in ring: 4 index in ring: 0 total nodes in ring 4
+[2026-11-24 14:20:26.590] [system::topology::RingTopology] [info] custom ring, id: 7, dimension: local total nodes in ring: 4 index in ring: 0 total nodes in ring 4
+[2026-11-24 14:20:26.602] [system::topology::RingTopology] [info] custom ring, id: 16, dimension: local total nodes in ring: 4 index in ring: 2 total nodes in ring 4
+[2026-11-24 14:20:26.602] [system::topology::RingTopology] [info] custom ring, id: 17, dimension: local total nodes in ring: 4 index in ring: 2 total nodes in ring 4
+[2026-11-24 14:20:26.602] [system::topology::RingTopology] [info] custom ring, id: 18, dimension: local total nodes in ring: 4 index in ring: 2 total nodes in ring 4
+[2026-11-24 14:20:26.602] [system::topology::RingTopology] [info] custom ring, id: 19, dimension: local total nodes in ring: 4 index in ring: 2 total nodes in ring 4
+[2026-11-24 14:20:26.602] [system::topology::RingTopology] [info] custom ring, id: 20, dimension: local total nodes in ring: 4 index in ring: 2 total nodes in ring 4
+[2026-11-24 14:20:26.602] [system::topology::RingTopology] [info] custom ring, id: 21, dimension: local total nodes in ring: 4 index in ring: 2 total nodes in ring 4
+[2026-11-24 14:20:26.602] [system::topology::RingTopology] [info] custom ring, id: 22, dimension: local total nodes in ring: 4 index in ring: 2 total nodes in ring 4
+[2026-11-24 14:20:26.602] [system::topology::RingTopology] [info] custom ring, id: 23, dimension: local total nodes in ring: 4 index in ring: 2 total nodes in ring 4
+[2026-11-24 14:20:26.610] [system::topology::RingTopology] [info] custom ring, id: 24, dimension: local total nodes in ring: 4 index in ring: 3 total nodes in ring 4
+[2026-11-24 14:20:26.610] [system::topology::RingTopology] [info] custom ring, id: 25, dimension: local total nodes in ring: 4 index in ring: 3 total nodes in ring 4
+[2026-11-24 14:20:26.610] [system::topology::RingTopology] [info] custom ring, id: 26, dimension: local total nodes in ring: 4 index in ring: 3 total nodes in ring 4
+[2026-11-24 14:20:26.610] [system::topology::RingTopology] [info] custom ring, id: 27, dimension: local total nodes in ring: 4 index in ring: 3 total nodes in ring 4
+[2026-11-24 14:20:26.610] [system::topology::RingTopology] [info] custom ring, id: 28, dimension: local total nodes in ring: 4 index in ring: 3 total nodes in ring 4
+[2026-11-24 14:20:26.610] [system::topology::RingTopology] [info] custom ring, id: 29, dimension: local total nodes in ring: 4 index in ring: 3 total nodes in ring 4
+[2026-11-24 14:20:26.610] [system::topology::RingTopology] [info] custom ring, id: 30, dimension: local total nodes in ring: 4 index in ring: 3 total nodes in ring 4
+[2026-11-24 14:20:26.610] [system::topology::RingTopology] [info] custom ring, id: 31, dimension: local total nodes in ring: 4 index in ring: 3 total nodes in ring 4
+[2026-11-24 14:45:57.925] [workload] [info] sys[1] finished, 18539660 cycles, exposed communication 18132568 cycles.
+[2026-11-24 14:45:57.931] [statistics] [info] sys[1]. Post statistics processing start.
+[2026-11-24 14:45:57.952] [statistics] [info] sys[1]. Post statistics processing end.
+[2026-11-24 14:45:57.952] [statistics] [info] sys[1], Wall time: 18539660
+[2026-11-24 14:45:57.952] [statistics] [info] sys[1], GPU time: 407092
+[2026-11-24 14:45:57.952] [statistics] [info] sys[1], Comm time: 18431552
+[2026-11-24 14:45:57.952] [statistics] [info] sys[1], Total compute-communication overlap: 298984
+[2026-11-24 14:45:57.954] [statistics] [info] sys[1], Compute bound percentage: 26.074%
+[2026-11-24 14:45:57.954] [statistics] [info] sys[1], Average compute utilization: 40.267%
+[2026-11-24 14:45:57.954] [statistics] [info] sys[1], Average memory utilization: 83.379%
+[2026-11-24 14:45:57.954] [statistics] [info] sys[1], Average operation intensity: 3183.497
+[2026-11-24 14:45:57.954] [workload] [info] sys[2] finished, 18539660 cycles, exposed communication 18132568 cycles.
+[2026-11-24 14:45:57.954] [statistics] [info] sys[2]. Post statistics processing start.
+[2026-11-24 14:45:57.963] [statistics] [info] sys[2]. Post statistics processing end.
+[2026-11-24 14:45:57.963] [statistics] [info] sys[2], Wall time: 18539660
+[2026-11-24 14:45:57.963] [statistics] [info] sys[2], GPU time: 407092
+[2026-11-24 14:45:57.963] [statistics] [info] sys[2], Comm time: 18431552
+[2026-11-24 14:45:57.963] [statistics] [info] sys[2], Total compute-communication overlap: 298984
+[2026-11-24 14:45:57.963] [statistics] [info] sys[2], Compute bound percentage: 26.074%
+[2026-11-24 14:45:57.963] [statistics] [info] sys[2], Average compute utilization: 40.267%
+[2026-11-24 14:45:57.963] [statistics] [info] sys[2], Average memory utilization: 83.379%
+[2026-11-24 14:45:57.963] [statistics] [info] sys[2], Average operation intensity: 3183.497
+[2026-11-24 14:45:57.963] [workload] [info] sys[3] finished, 18539660 cycles, exposed communication 18132568 cycles.
+[2026-11-24 14:45:57.963] [statistics] [info] sys[3]. Post statistics processing start.
+[2026-11-24 14:45:57.971] [statistics] [info] sys[3]. Post statistics processing end.
+[2026-11-24 14:45:57.971] [statistics] [info] sys[3], Wall time: 18539660
+[2026-11-24 14:45:57.971] [statistics] [info] sys[3], GPU time: 407092
+[2026-11-24 14:45:57.971] [statistics] [info] sys[3], Comm time: 18431552
+[2026-11-24 14:45:57.971] [statistics] [info] sys[3], Total compute-communication overlap: 298984
+[2026-11-24 14:45:57.971] [statistics] [info] sys[3], Compute bound percentage: 26.074%
+[2026-11-24 14:45:57.971] [statistics] [info] sys[3], Average compute utilization: 40.267%
+[2026-11-24 14:45:57.972] [statistics] [info] sys[3], Average memory utilization: 83.379%
+[2026-11-24 14:45:57.972] [statistics] [info] sys[3], Average operation intensity: 3183.497
+[2026-11-24 14:45:57.972] [workload] [info] sys[4] finished, 18539660 cycles, exposed communication 18132568 cycles.
+[2026-11-24 14:45:57.972] [statistics] [info] sys[4]. Post statistics processing start.
+[2026-11-24 14:45:57.979] [statistics] [info] sys[4]. Post statistics processing end.
+[2026-11-24 14:45:57.979] [statistics] [info] sys[4], Wall time: 18539660
+[2026-11-24 14:45:57.979] [statistics] [info] sys[4], GPU time: 407092
+[2026-11-24 14:45:57.979] [statistics] [info] sys[4], Comm time: 18431552
+[2026-11-24 14:45:57.979] [statistics] [info] sys[4], Total compute-communication overlap: 298984
+[2026-11-24 14:45:57.979] [statistics] [info] sys[4], Compute bound percentage: 26.074%
+[2026-11-24 14:45:57.979] [statistics] [info] sys[4], Average compute utilization: 40.267%
+[2026-11-24 14:45:57.979] [statistics] [info] sys[4], Average memory utilization: 83.379%
+[2026-11-24 14:45:57.979] [statistics] [info] sys[4], Average operation intensity: 3183.497
+[2026-11-24 14:45:57.979] [workload] [info] sys[5] finished, 18539660 cycles, exposed communication 18132568 cycles.
+[2026-11-24 14:45:57.979] [statistics] [info] sys[5]. Post statistics processing start.
+[2026-11-24 14:45:57.984] [statistics] [info] sys[5]. Post statistics processing end.
+[2026-11-24 14:45:57.984] [statistics] [info] sys[5], Wall time: 18539660
+[2026-11-24 14:45:57.984] [statistics] [info] sys[5], GPU time: 407092
+[2026-11-24 14:45:57.984] [statistics] [info] sys[5], Comm time: 18431552
+[2026-11-24 14:45:57.984] [statistics] [info] sys[5], Total compute-communication overlap: 298984
+[2026-11-24 14:45:57.984] [statistics] [info] sys[5], Compute bound percentage: 26.074%
+[2026-11-24 14:45:57.984] [statistics] [info] sys[5], Average compute utilization: 40.267%
+[2026-11-24 14:45:57.984] [statistics] [info] sys[5], Average memory utilization: 83.379%
+[2026-11-24 14:45:57.984] [statistics] [info] sys[5], Average operation intensity: 3183.497
+[2026-11-24 14:45:57.984] [workload] [info] sys[6] finished, 18539660 cycles, exposed communication 18132568 cycles.
+[2026-11-24 14:45:57.984] [statistics] [info] sys[6]. Post statistics processing start.
+[2026-11-24 14:45:57.987] [statistics] [info] sys[6]. Post statistics processing end.
+[2026-11-24 14:45:57.987] [statistics] [info] sys[6], Wall time: 18539660
+[2026-11-24 14:45:57.987] [statistics] [info] sys[6], GPU time: 407092
+[2026-11-24 14:45:57.987] [statistics] [info] sys[6], Comm time: 18431552
+[2026-11-24 14:45:57.987] [statistics] [info] sys[6], Total compute-communication overlap: 298984
+[2026-11-24 14:45:57.987] [statistics] [info] sys[6], Compute bound percentage: 26.074%
+[2026-11-24 14:45:57.987] [statistics] [info] sys[6], Average compute utilization: 40.267%
+[2026-11-24 14:45:57.987] [statistics] [info] sys[6], Average memory utilization: 83.379%
+[2026-11-24 14:45:57.987] [statistics] [info] sys[6], Average operation intensity: 3183.497
+[2026-11-24 14:45:57.988] [workload] [info] sys[7] finished, 18539660 cycles, exposed communication 18132568 cycles.
+[2026-11-24 14:45:57.988] [statistics] [info] sys[7]. Post statistics processing start.
+[2026-11-24 14:45:57.991] [statistics] [info] sys[7]. Post statistics processing end.
+[2026-11-24 14:45:57.991] [statistics] [info] sys[7], Wall time: 18539660
+[2026-11-24 14:45:57.991] [statistics] [info] sys[7], GPU time: 407092
+[2026-11-24 14:45:57.992] [statistics] [info] sys[7], Comm time: 18431552
+[2026-11-24 14:45:57.992] [statistics] [info] sys[7], Total compute-communication overlap: 298984
+[2026-11-24 14:45:57.992] [statistics] [info] sys[7], Compute bound percentage: 26.074%
+[2026-11-24 14:45:57.992] [statistics] [info] sys[7], Average compute utilization: 40.267%
+[2026-11-24 14:45:57.992] [statistics] [info] sys[7], Average memory utilization: 83.379%
+[2026-11-24 14:45:57.992] [statistics] [info] sys[7], Average operation intensity: 3183.497
+[2026-11-24 14:45:57.992] [workload] [info] sys[0] finished, 18539660 cycles, exposed communication 18132568 cycles.
+[2026-11-24 14:45:57.992] [statistics] [info] sys[0]. Post statistics processing start.
+[2026-11-24 14:45:57.994] [statistics] [info] sys[0]. Post statistics processing end.
+[2026-11-24 14:45:57.994] [statistics] [info] sys[0], Wall time: 18539660
+[2026-11-24 14:45:57.994] [statistics] [info] sys[0], GPU time: 407092
+[2026-11-24 14:45:57.994] [statistics] [info] sys[0], Comm time: 18431552
+[2026-11-24 14:45:57.994] [statistics] [info] sys[0], Total compute-communication overlap: 298984
+[2026-11-24 14:45:57.994] [statistics] [info] sys[0], Compute bound percentage: 26.074%
+[2026-11-24 14:45:57.994] [statistics] [info] sys[0], Average compute utilization: 40.267%
+[2026-11-24 14:45:57.994] [statistics] [info] sys[0], Average memory utilization: 83.379%
+[2026-11-24 14:45:57.994] [statistics] [info] sys[0], Average operation intensity: 3183.497
+[2026-11-24 14:45:57.994] [workload] [info] sys[9] finished, 18539879 cycles, exposed communication 18132787 cycles.
+[2026-11-24 14:45:57.994] [statistics] [info] sys[9]. Post statistics processing start.
+[2026-11-24 14:45:58.000] [statistics] [info] sys[9]. Post statistics processing end.
+[2026-11-24 14:45:58.000] [statistics] [info] sys[9], Wall time: 18539879
+[2026-11-24 14:45:58.000] [statistics] [info] sys[9], GPU time: 407092
+[2026-11-24 14:45:58.000] [statistics] [info] sys[9], Comm time: 18431771
+[2026-11-24 14:45:58.000] [statistics] [info] sys[9], Total compute-communication overlap: 298984
+[2026-11-24 14:45:58.000] [statistics] [info] sys[9], Compute bound percentage: 26.074%
+[2026-11-24 14:45:58.000] [statistics] [info] sys[9], Average compute utilization: 40.267%
+[2026-11-24 14:45:58.000] [statistics] [info] sys[9], Average memory utilization: 83.379%
+[2026-11-24 14:45:58.000] [statistics] [info] sys[9], Average operation intensity: 3183.497
+[2026-11-24 14:45:58.000] [workload] [info] sys[10] finished, 18539879 cycles, exposed communication 18132787 cycles.
+[2026-11-24 14:45:58.000] [statistics] [info] sys[10]. Post statistics processing start.
+[2026-11-24 14:45:58.003] [statistics] [info] sys[10]. Post statistics processing end.
+[2026-11-24 14:45:58.003] [statistics] [info] sys[10], Wall time: 18539879
+[2026-11-24 14:45:58.003] [statistics] [info] sys[10], GPU time: 407092
+[2026-11-24 14:45:58.003] [statistics] [info] sys[10], Comm time: 18431771
+[2026-11-24 14:45:58.003] [statistics] [info] sys[10], Total compute-communication overlap: 298984
+[2026-11-24 14:45:58.003] [statistics] [info] sys[10], Compute bound percentage: 26.074%
+[2026-11-24 14:45:58.003] [statistics] [info] sys[10], Average compute utilization: 40.267%
+[2026-11-24 14:45:58.003] [statistics] [info] sys[10], Average memory utilization: 83.379%
+[2026-11-24 14:45:58.003] [statistics] [info] sys[10], Average operation intensity: 3183.497
+[2026-11-24 14:45:58.003] [workload] [info] sys[11] finished, 18539879 cycles, exposed communication 18132787 cycles.
+[2026-11-24 14:45:58.003] [statistics] [info] sys[11]. Post statistics processing start.
+[2026-11-24 14:45:58.011] [statistics] [info] sys[11]. Post statistics processing end.
+[2026-11-24 14:45:58.011] [statistics] [info] sys[11], Wall time: 18539879
+[2026-11-24 14:45:58.011] [statistics] [info] sys[11], GPU time: 407092
+[2026-11-24 14:45:58.011] [statistics] [info] sys[11], Comm time: 18431771
+[2026-11-24 14:45:58.011] [statistics] [info] sys[11], Total compute-communication overlap: 298984
+[2026-11-24 14:45:58.011] [statistics] [info] sys[11], Compute bound percentage: 26.074%
+[2026-11-24 14:45:58.011] [statistics] [info] sys[11], Average compute utilization: 40.267%
+[2026-11-24 14:45:58.011] [statistics] [info] sys[11], Average memory utilization: 83.379%
+[2026-11-24 14:45:58.011] [statistics] [info] sys[11], Average operation intensity: 3183.497
+[2026-11-24 14:45:58.011] [workload] [info] sys[12] finished, 18539879 cycles, exposed communication 18132787 cycles.
+[2026-11-24 14:45:58.011] [statistics] [info] sys[12]. Post statistics processing start.
+[2026-11-24 14:45:58.018] [statistics] [info] sys[12]. Post statistics processing end.
+[2026-11-24 14:45:58.018] [statistics] [info] sys[12], Wall time: 18539879
+[2026-11-24 14:45:58.018] [statistics] [info] sys[12], GPU time: 407092
+[2026-11-24 14:45:58.018] [statistics] [info] sys[12], Comm time: 18431771
+[2026-11-24 14:45:58.018] [statistics] [info] sys[12], Total compute-communication overlap: 298984
+[2026-11-24 14:45:58.018] [statistics] [info] sys[12], Compute bound percentage: 26.074%
+[2026-11-24 14:45:58.018] [statistics] [info] sys[12], Average compute utilization: 40.267%
+[2026-11-24 14:45:58.018] [statistics] [info] sys[12], Average memory utilization: 83.379%
+[2026-11-24 14:45:58.018] [statistics] [info] sys[12], Average operation intensity: 3183.497
+[2026-11-24 14:45:58.018] [workload] [info] sys[13] finished, 18539879 cycles, exposed communication 18132787 cycles.
+[2026-11-24 14:45:58.018] [statistics] [info] sys[13]. Post statistics processing start.
+[2026-11-24 14:45:58.021] [statistics] [info] sys[13]. Post statistics processing end.
+[2026-11-24 14:45:58.021] [statistics] [info] sys[13], Wall time: 18539879
+[2026-11-24 14:45:58.021] [statistics] [info] sys[13], GPU time: 407092
+[2026-11-24 14:45:58.021] [statistics] [info] sys[13], Comm time: 18431771
+[2026-11-24 14:45:58.021] [statistics] [info] sys[13], Total compute-communication overlap: 298984
+[2026-11-24 14:45:58.021] [statistics] [info] sys[13], Compute bound percentage: 26.074%
+[2026-11-24 14:45:58.021] [statistics] [info] sys[13], Average compute utilization: 40.267%
+[2026-11-24 14:45:58.021] [statistics] [info] sys[13], Average memory utilization: 83.379%
+[2026-11-24 14:45:58.021] [statistics] [info] sys[13], Average operation intensity: 3183.497
+[2026-11-24 14:45:58.021] [workload] [info] sys[14] finished, 18539879 cycles, exposed communication 18132787 cycles.
+[2026-11-24 14:45:58.021] [statistics] [info] sys[14]. Post statistics processing start.
+[2026-11-24 14:45:58.024] [statistics] [info] sys[14]. Post statistics processing end.
+[2026-11-24 14:45:58.024] [statistics] [info] sys[14], Wall time: 18539879
+[2026-11-24 14:45:58.024] [statistics] [info] sys[14], GPU time: 407092
+[2026-11-24 14:45:58.024] [statistics] [info] sys[14], Comm time: 18431771
+[2026-11-24 14:45:58.024] [statistics] [info] sys[14], Total compute-communication overlap: 298984
+[2026-11-24 14:45:58.024] [statistics] [info] sys[14], Compute bound percentage: 26.074%
+[2026-11-24 14:45:58.024] [statistics] [info] sys[14], Average compute utilization: 40.267%
+[2026-11-24 14:45:58.024] [statistics] [info] sys[14], Average memory utilization: 83.379%
+[2026-11-24 14:45:58.024] [statistics] [info] sys[14], Average operation intensity: 3183.497
+[2026-11-24 14:45:58.024] [workload] [info] sys[15] finished, 18539879 cycles, exposed communication 18132787 cycles.
+[2026-11-24 14:45:58.024] [statistics] [info] sys[15]. Post statistics processing start.
+[2026-11-24 14:45:58.026] [statistics] [info] sys[15]. Post statistics processing end.
+[2026-11-24 14:45:58.026] [statistics] [info] sys[15], Wall time: 18539879
+[2026-11-24 14:45:58.026] [statistics] [info] sys[15], GPU time: 407092
+[2026-11-24 14:45:58.026] [statistics] [info] sys[15], Comm time: 18431771
+[2026-11-24 14:45:58.026] [statistics] [info] sys[15], Total compute-communication overlap: 298984
+[2026-11-24 14:45:58.026] [statistics] [info] sys[15], Compute bound percentage: 26.074%
+[2026-11-24 14:45:58.026] [statistics] [info] sys[15], Average compute utilization: 40.267%
+[2026-11-24 14:45:58.026] [statistics] [info] sys[15], Average memory utilization: 83.379%
+[2026-11-24 14:45:58.026] [statistics] [info] sys[15], Average operation intensity: 3183.497
+[2026-11-24 14:45:58.026] [workload] [info] sys[8] finished, 18539879 cycles, exposed communication 18132787 cycles.
+[2026-11-24 14:45:58.026] [statistics] [info] sys[8]. Post statistics processing start.
+[2026-11-24 14:45:58.028] [statistics] [info] sys[8]. Post statistics processing end.
+[2026-11-24 14:45:58.028] [statistics] [info] sys[8], Wall time: 18539879
+[2026-11-24 14:45:58.028] [statistics] [info] sys[8], GPU time: 407092
+[2026-11-24 14:45:58.028] [statistics] [info] sys[8], Comm time: 18431771
+[2026-11-24 14:45:58.028] [statistics] [info] sys[8], Total compute-communication overlap: 298984
+[2026-11-24 14:45:58.028] [statistics] [info] sys[8], Compute bound percentage: 26.074%
+[2026-11-24 14:45:58.028] [statistics] [info] sys[8], Average compute utilization: 40.267%
+[2026-11-24 14:45:58.028] [statistics] [info] sys[8], Average memory utilization: 83.379%
+[2026-11-24 14:45:58.028] [statistics] [info] sys[8], Average operation intensity: 3183.497
+[2026-11-24 14:45:58.028] [workload] [info] sys[25] finished, 18541137 cycles, exposed communication 18134045 cycles.
+[2026-11-24 14:45:58.028] [statistics] [info] sys[25]. Post statistics processing start.
+[2026-11-24 14:45:58.032] [statistics] [info] sys[25]. Post statistics processing end.
+[2026-11-24 14:45:58.032] [statistics] [info] sys[25], Wall time: 18541137
+[2026-11-24 14:45:58.032] [statistics] [info] sys[25], GPU time: 407092
+[2026-11-24 14:45:58.032] [statistics] [info] sys[25], Comm time: 18433029
+[2026-11-24 14:45:58.032] [statistics] [info] sys[25], Total compute-communication overlap: 298984
+[2026-11-24 14:45:58.032] [statistics] [info] sys[25], Compute bound percentage: 26.074%
+[2026-11-24 14:45:58.032] [statistics] [info] sys[25], Average compute utilization: 40.267%
+[2026-11-24 14:45:58.032] [statistics] [info] sys[25], Average memory utilization: 83.379%
+[2026-11-24 14:45:58.032] [statistics] [info] sys[25], Average operation intensity: 3183.497
+[2026-11-24 14:45:58.032] [workload] [info] sys[26] finished, 18541137 cycles, exposed communication 18134045 cycles.
+[2026-11-24 14:45:58.032] [statistics] [info] sys[26]. Post statistics processing start.
+[2026-11-24 14:45:58.034] [statistics] [info] sys[26]. Post statistics processing end.
+[2026-11-24 14:45:58.034] [statistics] [info] sys[26], Wall time: 18541137
+[2026-11-24 14:45:58.034] [statistics] [info] sys[26], GPU time: 407092
+[2026-11-24 14:45:58.034] [statistics] [info] sys[26], Comm time: 18433029
+[2026-11-24 14:45:58.034] [statistics] [info] sys[26], Total compute-communication overlap: 298984
+[2026-11-24 14:45:58.034] [statistics] [info] sys[26], Compute bound percentage: 26.074%
+[2026-11-24 14:45:58.034] [statistics] [info] sys[26], Average compute utilization: 40.267%
+[2026-11-24 14:45:58.034] [statistics] [info] sys[26], Average memory utilization: 83.379%
+[2026-11-24 14:45:58.034] [statistics] [info] sys[26], Average operation intensity: 3183.497
+[2026-11-24 14:45:58.034] [workload] [info] sys[27] finished, 18541137 cycles, exposed communication 18134045 cycles.
+[2026-11-24 14:45:58.034] [statistics] [info] sys[27]. Post statistics processing start.
+[2026-11-24 14:45:58.035] [statistics] [info] sys[27]. Post statistics processing end.
+[2026-11-24 14:45:58.035] [statistics] [info] sys[27], Wall time: 18541137
+[2026-11-24 14:45:58.035] [statistics] [info] sys[27], GPU time: 407092
+[2026-11-24 14:45:58.035] [statistics] [info] sys[27], Comm time: 18433029
+[2026-11-24 14:45:58.035] [statistics] [info] sys[27], Total compute-communication overlap: 298984
+[2026-11-24 14:45:58.035] [statistics] [info] sys[27], Compute bound percentage: 26.074%
+[2026-11-24 14:45:58.035] [statistics] [info] sys[27], Average compute utilization: 40.267%
+[2026-11-24 14:45:58.035] [statistics] [info] sys[27], Average memory utilization: 83.379%
+[2026-11-24 14:45:58.035] [statistics] [info] sys[27], Average operation intensity: 3183.497
+[2026-11-24 14:45:58.035] [workload] [info] sys[28] finished, 18541137 cycles, exposed communication 18134045 cycles.
+[2026-11-24 14:45:58.035] [statistics] [info] sys[28]. Post statistics processing start.
+[2026-11-24 14:45:58.037] [statistics] [info] sys[28]. Post statistics processing end.
+[2026-11-24 14:45:58.037] [statistics] [info] sys[28], Wall time: 18541137
+[2026-11-24 14:45:58.037] [statistics] [info] sys[28], GPU time: 407092
+[2026-11-24 14:45:58.037] [statistics] [info] sys[28], Comm time: 18433029
+[2026-11-24 14:45:58.037] [statistics] [info] sys[28], Total compute-communication overlap: 298984
+[2026-11-24 14:45:58.037] [statistics] [info] sys[28], Compute bound percentage: 26.074%
+[2026-11-24 14:45:58.037] [statistics] [info] sys[28], Average compute utilization: 40.267%
+[2026-11-24 14:45:58.037] [statistics] [info] sys[28], Average memory utilization: 83.379%
+[2026-11-24 14:45:58.037] [statistics] [info] sys[28], Average operation intensity: 3183.497
+[2026-11-24 14:45:58.037] [workload] [info] sys[29] finished, 18541137 cycles, exposed communication 18134045 cycles.
+[2026-11-24 14:45:58.037] [statistics] [info] sys[29]. Post statistics processing start.
+[2026-11-24 14:45:58.038] [statistics] [info] sys[29]. Post statistics processing end.
+[2026-11-24 14:45:58.038] [statistics] [info] sys[29], Wall time: 18541137
+[2026-11-24 14:45:58.038] [statistics] [info] sys[29], GPU time: 407092
+[2026-11-24 14:45:58.038] [statistics] [info] sys[29], Comm time: 18433029
+[2026-11-24 14:45:58.038] [statistics] [info] sys[29], Total compute-communication overlap: 298984
+[2026-11-24 14:45:58.038] [statistics] [info] sys[29], Compute bound percentage: 26.074%
+[2026-11-24 14:45:58.038] [statistics] [info] sys[29], Average compute utilization: 40.267%
+[2026-11-24 14:45:58.038] [statistics] [info] sys[29], Average memory utilization: 83.379%
+[2026-11-24 14:45:58.038] [statistics] [info] sys[29], Average operation intensity: 3183.497
+[2026-11-24 14:45:58.038] [workload] [info] sys[30] finished, 18541137 cycles, exposed communication 18134045 cycles.
+[2026-11-24 14:45:58.038] [statistics] [info] sys[30]. Post statistics processing start.
+[2026-11-24 14:45:58.040] [statistics] [info] sys[30]. Post statistics processing end.
+[2026-11-24 14:45:58.040] [statistics] [info] sys[30], Wall time: 18541137
+[2026-11-24 14:45:58.040] [statistics] [info] sys[30], GPU time: 407092
+[2026-11-24 14:45:58.040] [statistics] [info] sys[30], Comm time: 18433029
+[2026-11-24 14:45:58.040] [statistics] [info] sys[30], Total compute-communication overlap: 298984
+[2026-11-24 14:45:58.040] [statistics] [info] sys[30], Compute bound percentage: 26.074%
+[2026-11-24 14:45:58.040] [statistics] [info] sys[30], Average compute utilization: 40.267%
+[2026-11-24 14:45:58.040] [statistics] [info] sys[30], Average memory utilization: 83.379%
+[2026-11-24 14:45:58.040] [statistics] [info] sys[30], Average operation intensity: 3183.497
+[2026-11-24 14:45:58.040] [workload] [info] sys[31] finished, 18541137 cycles, exposed communication 18134045 cycles.
+[2026-11-24 14:45:58.040] [statistics] [info] sys[31]. Post statistics processing start.
+[2026-11-24 14:45:58.041] [statistics] [info] sys[31]. Post statistics processing end.
+[2026-11-24 14:45:58.041] [statistics] [info] sys[31], Wall time: 18541137
+[2026-11-24 14:45:58.041] [statistics] [info] sys[31], GPU time: 407092
+[2026-11-24 14:45:58.041] [statistics] [info] sys[31], Comm time: 18433029
+[2026-11-24 14:45:58.041] [statistics] [info] sys[31], Total compute-communication overlap: 298984
+[2026-11-24 14:45:58.041] [statistics] [info] sys[31], Compute bound percentage: 26.074%
+[2026-11-24 14:45:58.041] [statistics] [info] sys[31], Average compute utilization: 40.267%
+[2026-11-24 14:45:58.041] [statistics] [info] sys[31], Average memory utilization: 83.379%
+[2026-11-24 14:45:58.041] [statistics] [info] sys[31], Average operation intensity: 3183.497
+[2026-11-24 14:45:58.041] [workload] [info] sys[24] finished, 18541137 cycles, exposed communication 18134045 cycles.
+[2026-11-24 14:45:58.042] [statistics] [info] sys[24]. Post statistics processing start.
+[2026-11-24 14:45:58.043] [statistics] [info] sys[24]. Post statistics processing end.
+[2026-11-24 14:45:58.043] [statistics] [info] sys[24], Wall time: 18541137
+[2026-11-24 14:45:58.043] [statistics] [info] sys[24], GPU time: 407092
+[2026-11-24 14:45:58.043] [statistics] [info] sys[24], Comm time: 18433029
+[2026-11-24 14:45:58.043] [statistics] [info] sys[24], Total compute-communication overlap: 298984
+[2026-11-24 14:45:58.043] [statistics] [info] sys[24], Compute bound percentage: 26.074%
+[2026-11-24 14:45:58.043] [statistics] [info] sys[24], Average compute utilization: 40.267%
+[2026-11-24 14:45:58.043] [statistics] [info] sys[24], Average memory utilization: 83.379%
+[2026-11-24 14:45:58.043] [statistics] [info] sys[24], Average operation intensity: 3183.497
+[2026-11-24 14:45:58.043] [workload] [info] sys[17] finished, 18541432 cycles, exposed communication 18134340 cycles.
+[2026-11-24 14:45:58.043] [statistics] [info] sys[17]. Post statistics processing start.
+[2026-11-24 14:45:58.046] [statistics] [info] sys[17]. Post statistics processing end.
+[2026-11-24 14:45:58.046] [statistics] [info] sys[17], Wall time: 18541432
+[2026-11-24 14:45:58.046] [statistics] [info] sys[17], GPU time: 407092
+[2026-11-24 14:45:58.046] [statistics] [info] sys[17], Comm time: 18433324
+[2026-11-24 14:45:58.046] [statistics] [info] sys[17], Total compute-communication overlap: 298984
+[2026-11-24 14:45:58.046] [statistics] [info] sys[17], Compute bound percentage: 26.074%
+[2026-11-24 14:45:58.046] [statistics] [info] sys[17], Average compute utilization: 40.267%
+[2026-11-24 14:45:58.046] [statistics] [info] sys[17], Average memory utilization: 83.379%
+[2026-11-24 14:45:58.046] [statistics] [info] sys[17], Average operation intensity: 3183.497
+[2026-11-24 14:45:58.046] [workload] [info] sys[18] finished, 18541432 cycles, exposed communication 18134340 cycles.
+[2026-11-24 14:45:58.046] [statistics] [info] sys[18]. Post statistics processing start.
+[2026-11-24 14:45:58.047] [statistics] [info] sys[18]. Post statistics processing end.
+[2026-11-24 14:45:58.047] [statistics] [info] sys[18], Wall time: 18541432
+[2026-11-24 14:45:58.047] [statistics] [info] sys[18], GPU time: 407092
+[2026-11-24 14:45:58.047] [statistics] [info] sys[18], Comm time: 18433324
+[2026-11-24 14:45:58.047] [statistics] [info] sys[18], Total compute-communication overlap: 298984
+[2026-11-24 14:45:58.047] [statistics] [info] sys[18], Compute bound percentage: 26.074%
+[2026-11-24 14:45:58.047] [statistics] [info] sys[18], Average compute utilization: 40.267%
+[2026-11-24 14:45:58.047] [statistics] [info] sys[18], Average memory utilization: 83.379%
+[2026-11-24 14:45:58.047] [statistics] [info] sys[18], Average operation intensity: 3183.497
+[2026-11-24 14:45:58.047] [workload] [info] sys[19] finished, 18541432 cycles, exposed communication 18134340 cycles.
+[2026-11-24 14:45:58.047] [statistics] [info] sys[19]. Post statistics processing start.
+[2026-11-24 14:45:58.048] [statistics] [info] sys[19]. Post statistics processing end.
+[2026-11-24 14:45:58.048] [statistics] [info] sys[19], Wall time: 18541432
+[2026-11-24 14:45:58.048] [statistics] [info] sys[19], GPU time: 407092
+[2026-11-24 14:45:58.048] [statistics] [info] sys[19], Comm time: 18433324
+[2026-11-24 14:45:58.048] [statistics] [info] sys[19], Total compute-communication overlap: 298984
+[2026-11-24 14:45:58.048] [statistics] [info] sys[19], Compute bound percentage: 26.074%
+[2026-11-24 14:45:58.048] [statistics] [info] sys[19], Average compute utilization: 40.267%
+[2026-11-24 14:45:58.048] [statistics] [info] sys[19], Average memory utilization: 83.379%
+[2026-11-24 14:45:58.048] [statistics] [info] sys[19], Average operation intensity: 3183.497
+[2026-11-24 14:45:58.048] [workload] [info] sys[20] finished, 18541432 cycles, exposed communication 18134340 cycles.
+[2026-11-24 14:45:58.048] [statistics] [info] sys[20]. Post statistics processing start.
+[2026-11-24 14:45:58.050] [statistics] [info] sys[20]. Post statistics processing end.
+[2026-11-24 14:45:58.050] [statistics] [info] sys[20], Wall time: 18541432
+[2026-11-24 14:45:58.050] [statistics] [info] sys[20], GPU time: 407092
+[2026-11-24 14:45:58.050] [statistics] [info] sys[20], Comm time: 18433324
+[2026-11-24 14:45:58.050] [statistics] [info] sys[20], Total compute-communication overlap: 298984
+[2026-11-24 14:45:58.050] [statistics] [info] sys[20], Compute bound percentage: 26.074%
+[2026-11-24 14:45:58.050] [statistics] [info] sys[20], Average compute utilization: 40.267%
+[2026-11-24 14:45:58.050] [statistics] [info] sys[20], Average memory utilization: 83.379%
+[2026-11-24 14:45:58.050] [statistics] [info] sys[20], Average operation intensity: 3183.497
+[2026-11-24 14:45:58.050] [workload] [info] sys[21] finished, 18541432 cycles, exposed communication 18134340 cycles.
+[2026-11-24 14:45:58.050] [statistics] [info] sys[21]. Post statistics processing start.
+[2026-11-24 14:45:58.052] [statistics] [info] sys[21]. Post statistics processing end.
+[2026-11-24 14:45:58.052] [statistics] [info] sys[21], Wall time: 18541432
+[2026-11-24 14:45:58.052] [statistics] [info] sys[21], GPU time: 407092
+[2026-11-24 14:45:58.052] [statistics] [info] sys[21], Comm time: 18433324
+[2026-11-24 14:45:58.052] [statistics] [info] sys[21], Total compute-communication overlap: 298984
+[2026-11-24 14:45:58.052] [statistics] [info] sys[21], Compute bound percentage: 26.074%
+[2026-11-24 14:45:58.052] [statistics] [info] sys[21], Average compute utilization: 40.267%
+[2026-11-24 14:45:58.052] [statistics] [info] sys[21], Average memory utilization: 83.379%
+[2026-11-24 14:45:58.052] [statistics] [info] sys[21], Average operation intensity: 3183.497
+[2026-11-24 14:45:58.052] [workload] [info] sys[22] finished, 18541432 cycles, exposed communication 18134340 cycles.
+[2026-11-24 14:45:58.052] [statistics] [info] sys[22]. Post statistics processing start.
+[2026-11-24 14:45:58.052] [statistics] [info] sys[22]. Post statistics processing end.
+[2026-11-24 14:45:58.052] [statistics] [info] sys[22], Wall time: 18541432
+[2026-11-24 14:45:58.052] [statistics] [info] sys[22], GPU time: 407092
+[2026-11-24 14:45:58.052] [statistics] [info] sys[22], Comm time: 18433324
+[2026-11-24 14:45:58.052] [statistics] [info] sys[22], Total compute-communication overlap: 298984
+[2026-11-24 14:45:58.052] [statistics] [info] sys[22], Compute bound percentage: 26.074%
+[2026-11-24 14:45:58.052] [statistics] [info] sys[22], Average compute utilization: 40.267%
+[2026-11-24 14:45:58.052] [statistics] [info] sys[22], Average memory utilization: 83.379%
+[2026-11-24 14:45:58.052] [statistics] [info] sys[22], Average operation intensity: 3183.497
+[2026-11-24 14:45:58.052] [workload] [info] sys[23] finished, 18541432 cycles, exposed communication 18134340 cycles.
+[2026-11-24 14:45:58.052] [statistics] [info] sys[23]. Post statistics processing start.
+[2026-11-24 14:45:58.053] [statistics] [info] sys[23]. Post statistics processing end.
+[2026-11-24 14:45:58.053] [statistics] [info] sys[23], Wall time: 18541432
+[2026-11-24 14:45:58.053] [statistics] [info] sys[23], GPU time: 407092
+[2026-11-24 14:45:58.053] [statistics] [info] sys[23], Comm time: 18433324
+[2026-11-24 14:45:58.053] [statistics] [info] sys[23], Total compute-communication overlap: 298984
+[2026-11-24 14:45:58.053] [statistics] [info] sys[23], Compute bound percentage: 26.074%
+[2026-11-24 14:45:58.053] [statistics] [info] sys[23], Average compute utilization: 40.267%
+[2026-11-24 14:45:58.053] [statistics] [info] sys[23], Average memory utilization: 83.379%
+[2026-11-24 14:45:58.053] [statistics] [info] sys[23], Average operation intensity: 3183.497
+[2026-11-24 14:45:58.053] [workload] [info] sys[16] finished, 18541432 cycles, exposed communication 18134340 cycles.
+[2026-11-24 14:45:58.053] [statistics] [info] sys[16]. Post statistics processing start.
+[2026-11-24 14:45:58.053] [statistics] [info] sys[16]. Post statistics processing end.
+[2026-11-24 14:45:58.053] [statistics] [info] sys[16], Wall time: 18541432
+[2026-11-24 14:45:58.053] [statistics] [info] sys[16], GPU time: 407092
+[2026-11-24 14:45:58.053] [statistics] [info] sys[16], Comm time: 18433324
+[2026-11-24 14:45:58.053] [statistics] [info] sys[16], Total compute-communication overlap: 298984
+[2026-11-24 14:45:58.053] [statistics] [info] sys[16], Compute bound percentage: 26.074%
+[2026-11-24 14:45:58.053] [statistics] [info] sys[16], Average compute utilization: 40.267%
+[2026-11-24 14:45:58.053] [statistics] [info] sys[16], Average memory utilization: 83.379%
+[2026-11-24 14:45:58.053] [statistics] [info] sys[16], Average operation intensity: 3183.497
