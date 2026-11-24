@@ -1,0 +1,34 @@
+A="--host-delay-ns 500 --fabric-delay-ns 500"
+
+python3 gen_topo.py torus $A                               -o torus_base_uniform.txt
+python3 gen_topo.py torus $A --twist 4                     -o torus_twisted_uniform.txt
+python3 gen_topo.py torus $A --placement aligned           -o torus_aligned_uniform.txt
+python3 gen_topo.py torus $A --placement random --seed 1   -o torus_random1_uniform.txt
+python3 gen_topo.py torus $A --placement random --seed 2   -o torus_random2_uniform.txt
+
+logical topology = topologies/logical_topology.json
+ring collective file = astra-sim/examples/system/native_collectives/Ring_4chunks_roofline.json
+---------------------------------------------
+
+A="--host-delay-ns 1 --fabric-delay-ns 500"
+
+python3 gen_topo.py torus $A                               -o torus_base_hostlink.txt
+python3 gen_topo.py torus $A --twist 4                     -o torus_twisted_hostlink.txt
+python3 gen_topo.py torus $A --placement aligned           -o torus_aligned_hostlink.txt
+python3 gen_topo.py torus $A --placement random --seed 1   -o torus_random1_hostlink.txt
+python3 gen_topo.py torus $A --placement random --seed 2   -o torus_random2_hostlink.txt
+
+logical topology = topologies/logical_topology.json
+ring collective file = astra-sim/examples/system/native_collectives/Ring_4chunks_roofline.json
+---------------------------------------------
+
+A="--gpus-per-switch 2 --host-delay-ns 100 --fabric-delay-ns 500"
+
+python3 gen_topo.py torus $A                              -o torus2_base.txt
+python3 gen_topo.py torus $A --placement aligned          -o torus2_aligned.txt
+python3 gen_topo.py torus $A --placement random --seed 1  -o torus2_random1.txt
+python3 gen_topo.py torus $A --placement random --seed 2  -o torus2_random2.txt
+
+logical topology = topologies/logical_topology_3D.json
+ring collective file = astra-sim/examples/system/native_collectives/Ring_4chunks_3D_roofline.json
+---------------------------------------------
