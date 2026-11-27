@@ -1,0 +1,6 @@
+This is after submitting on canvas and getting the feedback on canvas:
+This is very good progress. 
+
+Your analysis should go beyond: here are the workloads we tried and here is the performance we got. In particular, it should make it clear why it is plausible to put such workload on such a network. For example, no one will try to operate a modern training workload on network that only supports 10 Gbps per link.
+
+To make your analysis more rigorous, you should provide some analysis per topology (e.g., bisection bandwidth, diameter, maximum supported workload size). Then, argue that the workload you picked should fit. This should also give you ideas on how to modify the network to support the workload performance.

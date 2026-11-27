@@ -1,0 +1,33 @@
+Final report: Your final project report should present your work as a coherent research paper, explaining the problem you investigated, the approach you took, and what you learned from your experiments. In particular your sections should cover the following:
+
+Introduction: Clearly define the problem and state one or more hypotheses that your experiments will test.  
+
+Motivation: Clearly define the gap in prior work as well as the significance of the problem you are tackling (including any results you generated that help make the point clear).
+
+Methodology: Explain how your approach addresses the problem and discuss its practicality.  
+
+Results: Interpret your findings and draw conclusions rather than simply presenting numbers. Explain whether the results support your hypotheses.  
+
+Report Format: Write the report as a research paper in LaTeX, using \documentclass[sigconf]{acmart}. 
+
+Presentation: Your presentation should communicate your project's problem, approach, and key findings to your fellow students, not the instructor. Assume your audience is unfamiliar with your project and focus on helping them understand what you investigated, why it matters, and what you learned. I recommend keeping presentation content to 10 slides (not counting the title and conclusion slides). Your presentation should include:  
+
+Context: Explain the general background needed to understand your project.  
+
+Problem: Clearly define the problem within that context.  
+
+Hypotheses: State one or more hypotheses that your methodology and experiments aim to validate.  
+
+Methodology: Summarize your approach and how it addresses the problem.  
+
+Experimental Setting: Clearly explain how you conducted your experiments.  
+
+Results: Focus on key insights and conclusions rather than simply presenting numbers.
+
+Presentation lectures logistics: 
+
+Each group has 10 minutes.  
+
+One student may present on behalf of the entire group.  
+
+All students must attend all presentation sessions, including those in which they are not presenting. Attendance at other groups' presentations accounts for 20% of the presentation grade. Grades will be assigned on all-or-nothing basis.

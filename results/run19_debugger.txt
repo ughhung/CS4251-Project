@@ -1,0 +1,555 @@
+[New LWP 1625]
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/aarch64-linux-gnu/libthread_db.so.1".
+0x0000aaaabf90f3d8 in ns3::Ptr<ns3::SwitchNode>::operator-> (this=0xffffc0b24d10) at /app/astra-sim/extern/network_backend/ns-3/src/core/model/ptr.h:720
+720	}
+  Id   Target Id                                          Frame 
+* 1    Thread 0xffffac96c880 (LWP 1596) "ns3.42-AstraSim" 0x0000aaaabf90f3d8 in ns3::Ptr<ns3::SwitchNode>::operator-> (this=0xffffc0b24d10) at /app/astra-sim/extern/network_backend/ns-3/src/core/model/ptr.h:720
+  2    Thread 0xffffa99be020 (LWP 1625) "ns3.42-AstraSim" __futex_abstimed_wait_common64 (private=0, cancel=true, abstime=0x0, op=393, expected=0, futex_word=0xaaaadda0256c) at ./nptl/futex-internal.c:57
+
+Thread 2 (Thread 0xffffa99be020 (LWP 1625) "ns3.42-AstraSim"):
+#0  __futex_abstimed_wait_common64 (private=0, cancel=true, abstime=0x0, op=393, expected=0, futex_word=0xaaaadda0256c) at ./nptl/futex-internal.c:57
+#1  __futex_abstimed_wait_common (cancel=true, private=0, abstime=0x0, clockid=0, expected=0, futex_word=0xaaaadda0256c) at ./nptl/futex-internal.c:87
+#2  __GI___futex_abstimed_wait_cancelable64 (futex_word=futex_word@entry=0xaaaadda0256c, expected=expected@entry=0, clockid=clockid@entry=0, abstime=abstime@entry=0x0, private=private@entry=0) at ./nptl/futex-internal.c:139
+#3  0x0000ffffaa2df6a4 in __pthread_cond_wait_common (abstime=0x0, clockid=0, mutex=0xaaaadda02510, cond=0xaaaadda02540) at ./nptl/pthread_cond_wait.c:503
+#4  ___pthread_cond_wait (cond=0xaaaadda02540, mutex=0xaaaadda02510) at ./nptl/pthread_cond_wait.c:627
+#5  0x0000aaaabfb74ca8 in std::condition_variable::wait<spdlog::details::mpmc_blocking_queue<spdlog::details::async_msg>::dequeue(spdlog::details::async_msg&)::{lambda()#1}>(std::unique_lock<std::mutex>&, spdlog::details::mpmc_blocking_queue<spdlog::details::async_msg>::dequeue(spdlog::details::async_msg&)::{lambda()#1}) (this=0xaaaadda02540, __lock=..., __p=...) at /usr/include/c++/11/condition_variable:103
+#6  0x0000aaaabfb744cc in spdlog::details::mpmc_blocking_queue<spdlog::details::async_msg>::dequeue (this=0xaaaadda02510, popped_item=...) at /app/astra-sim/extern/helper/spdlog/include/spdlog/details/mpmc_blocking_q.h:85
+#7  0x0000aaaabfb71e4c in spdlog::details::thread_pool::process_next_msg_ (this=0xaaaadda02510) at /app/astra-sim/extern/helper/spdlog/include/spdlog/details/thread_pool-inl.h:102
+#8  0x0000aaaabfb71df4 in spdlog::details::thread_pool::worker_loop_ (this=0xaaaadda02510) at /app/astra-sim/extern/helper/spdlog/include/spdlog/details/thread_pool-inl.h:93
+#9  0x0000aaaabfb71640 in operator() (__closure=0xaaaadda08d98) at /app/astra-sim/extern/helper/spdlog/include/spdlog/details/thread_pool-inl.h:29
+#10 0x0000aaaabfb73424 in std::__invoke_impl<void, spdlog::details::thread_pool::thread_pool(size_t, size_t, std::function<void()>, std::function<void()>)::<lambda()> >(std::__invoke_other, struct {...} &&) (__f=...) at /usr/include/c++/11/bits/invoke.h:61
+#11 0x0000aaaabfb733dc in std::__invoke<spdlog::details::thread_pool::thread_pool(size_t, size_t, std::function<void()>, std::function<void()>)::<lambda()> >(struct {...} &&) (__fn=...) at /usr/include/c++/11/bits/invoke.h:96
+#12 0x0000aaaabfb73378 in std::thread::_Invoker<std::tuple<spdlog::details::thread_pool::thread_pool(size_t, size_t, std::function<void()>, std::function<void()>)::<lambda()> > >::_M_invoke<0>(std::_Index_tuple<0>) (this=0xaaaadda08d98) at /usr/include/c++/11/bits/std_thread.h:259
+#13 0x0000aaaabfb7334c in std::thread::_Invoker<std::tuple<spdlog::details::thread_pool::thread_pool(size_t, size_t, std::function<void()>, std::function<void()>)::<lambda()> > >::operator()(void) (this=0xaaaadda08d98) at /usr/include/c++/11/bits/std_thread.h:266
+#14 0x0000aaaabfb7332c in std::thread::_State_impl<std::thread::_Invoker<std::tuple<spdlog::details::thread_pool::thread_pool(size_t, size_t, std::function<void()>, std::function<void()>)::<lambda()> > > >::_M_run(void) (this=0xaaaadda08d90) at /usr/include/c++/11/bits/std_thread.h:211
+#15 0x0000ffffaa5b29cc in ?? () from /lib/aarch64-linux-gnu/libstdc++.so.6
+#16 0x0000ffffaa2e03a8 in start_thread (arg=0x80e860) at ./nptl/pthread_create.c:442
+#17 0x0000ffffaa349f9c in thread_start () at ../sysdeps/unix/sysv/linux/aarch64/clone.S:79
+
+Thread 1 (Thread 0xffffac96c880 (LWP 1596) "ns3.42-AstraSim"):
+#0  0x0000aaaabf90f3d8 in ns3::Ptr<ns3::SwitchNode>::operator-> (this=0xffffc0b24d10) at /app/astra-sim/extern/network_backend/ns-3/src/core/model/ptr.h:720
+#1  0x0000aaaabf8f879c in monitor_buffer (qlen_output=0xaaaae17dd570, n=0xaaaabff37090 <n>) at /app/astra-sim/extern/network_backend/ns-3/scratch/../scratch/common.h:170
+#2  0x0000aaaabf91b610 in ns3::MakeEvent<_IO_FILE*, ns3::NodeContainer*, _IO_FILE*, ns3::NodeContainer*>(void (*)(_IO_FILE*, ns3::NodeContainer*), _IO_FILE*, ns3::NodeContainer*)::EventFunctionImpl::Notify()::{lambda(_IO_FILE*, ns3::NodeContainer*)#1}::operator()(_IO_FILE*, ns3::NodeContainer*) const (__closure=0xffffc0b24ea0, args#0=0xaaaae17dd570, args#1=0xaaaabff37090 <n>) at /app/astra-sim/extern/network_backend/ns-3/src/core/model/make-event.h:194
+#3  0x0000aaaabf941388 in std::__invoke_impl<void, ns3::MakeEvent<_IO_FILE*, ns3::NodeContainer*, _IO_FILE*, ns3::NodeContainer*>(void (*)(_IO_FILE*, ns3::NodeContainer*), _IO_FILE*, ns3::NodeContainer*)::EventFunctionImpl::Notify()::{lambda(_IO_FILE*, ns3::NodeContainer*)#1}, _IO_FILE*&, ns3::NodeContainer*&>(std::__invoke_other, ns3::MakeEvent<_IO_FILE*, ns3::NodeContainer*, _IO_FILE*, ns3::NodeContainer*>(void (*)(_IO_FILE*, ns3::NodeContainer*), _IO_FILE*, ns3::NodeContainer*)::EventFunctionImpl::Notify()::{lambda(_IO_FILE*, ns3::NodeContainer*)#1}&&, _IO_FILE*&, ns3::NodeContainer*&) (__f=...) at /usr/include/c++/11/bits/invoke.h:61
+#4  0x0000aaaabf92cadc in std::__invoke<ns3::MakeEvent<_IO_FILE*, ns3::NodeContainer*, _IO_FILE*, ns3::NodeContainer*>(void (*)(_IO_FILE*, ns3::NodeContainer*), _IO_FILE*, ns3::NodeContainer*)::EventFunctionImpl::Notify()::{lambda(_IO_FILE*, ns3::NodeContainer*)#1}, _IO_FILE*&, ns3::NodeContainer*&>(ns3::MakeEvent<_IO_FILE*, ns3::NodeContainer*, _IO_FILE*, ns3::NodeContainer*>(void (*)(_IO_FILE*, ns3::NodeContainer*), _IO_FILE*, ns3::NodeContainer*)::EventFunctionImpl::Notify()::{lambda(_IO_FILE*, ns3::NodeContainer*)#1}&&, _IO_FILE*&, ns3::NodeContainer*&) (__fn=...) at /usr/include/c++/11/bits/invoke.h:96
+#5  0x0000aaaabf91b66c in std::__apply_impl<ns3::MakeEvent<_IO_FILE*, ns3::NodeContainer*, _IO_FILE*, ns3::NodeContainer*>(void (*)(_IO_FILE*, ns3::NodeContainer*), _IO_FILE*, ns3::NodeContainer*)::EventFunctionImpl::Notify()::{lambda(_IO_FILE*, ns3::NodeContainer*)#1}, std::tuple<_IO_FILE*, ns3::NodeContainer*>&, 0ul, 1ul>(ns3::MakeEvent<_IO_FILE*, ns3::NodeContainer*, _IO_FILE*, ns3::NodeContainer*>(void (*)(_IO_FILE*, ns3::NodeContainer*), _IO_FILE*, ns3::NodeContainer*)::EventFunctionImpl::Notify()::{lambda(_IO_FILE*, ns3::NodeContainer*)#1}&&, std::tuple<_IO_FILE*, ns3::NodeContainer*>&, std::integer_sequence<unsigned long, 0ul, 1ul>) (__f=..., __t=std::tuple containing = {...}) at /usr/include/c++/11/tuple:1854
+#6  0x0000aaaabf91b6b4 in std::apply<ns3::MakeEvent<_IO_FILE*, ns3::NodeContainer*, _IO_FILE*, ns3::NodeContainer*>(void (*)(_IO_FILE*, ns3::NodeContainer*), _IO_FILE*, ns3::NodeContainer*)::EventFunctionImpl::Notify()::{lambda(_IO_FILE*, ns3::NodeContainer*)#1}, std::tuple<_IO_FILE*, ns3::NodeContainer*>&>(ns3::MakeEvent<_IO_FILE*, ns3::NodeContainer*, _IO_FILE*, ns3::NodeContainer*>(void (*)(_IO_FILE*, ns3::NodeContainer*), _IO_FILE*, ns3::NodeContainer*)::EventFunctionImpl::Notify()::{lambda(_IO_FILE*, ns3::NodeContainer*)#1}&&, std::tuple<_IO_FILE*, ns3::NodeContainer*>&) (__f=..., __t=std::tuple containing = {...}) at /usr/include/c++/11/tuple:1865
+#7  0x0000aaaabf91b5b4 in ns3::MakeEvent<_IO_FILE*, ns3::NodeContainer*, _IO_FILE*, ns3::NodeContainer*>(void (*)(_IO_FILE*, ns3::NodeContainer*), _IO_FILE*, ns3::NodeContainer*)::EventFunctionImpl::Notify() (this=0xaaaae5880820) at /app/astra-sim/extern/network_backend/ns-3/src/core/model/make-event.h:194
+#8  0x0000ffffaa9525b8 in ns3::EventImpl::Invoke (this=0xaaaae5880820) at /app/astra-sim/extern/network_backend/ns-3/src/core/model/event-impl.cc:52
+#9  0x0000ffffaa958800 in ns3::DefaultSimulatorImpl::ProcessOneEvent (this=0xaaaae19e4ac0) at /app/astra-sim/extern/network_backend/ns-3/src/core/model/default-simulator-impl.cc:144
+#10 0x0000ffffaa958c78 in ns3::DefaultSimulatorImpl::Run (this=0xaaaae19e4ac0) at /app/astra-sim/extern/network_backend/ns-3/src/core/model/default-simulator-impl.cc:197
+#11 0x0000ffffaa953628 in ns3::Simulator::Run () at /app/astra-sim/extern/network_backend/ns-3/src/core/model/simulator.cc:182
+#12 0x0000aaaabf901bec in main (argc=7, argv=0xffffc0b253e8) at /app/astra-sim/astra-sim/network_frontend/ns3/AstraSimNetwork.cc:302
+
+sim_send_waiting_hash: 0 keys
+$1 = std::map with 0 elements
+
+sim_recv_waiting_hash: 32 keys
+$2 = std::map with 32 elements = {
+  [{
+    first = 537000608,
+    second = {
+      first = 16,
+      second = 17
+    }
+  }] = std::queue wrapping: std::deque with 1 element = {{
+      src_id = 16,
+      dst_id = 17,
+      type = 1,
+      remaining_msg_bytes = 2048000,
+      fun_arg = 0xaaaadf4cf3c0,
+      msg_handler = 0xaaaabf9ef084 <AstraSim::Sys::handleEvent(void*)>
+    }},
+  [{
+    first = 537000608,
+    second = {
+      first = 17,
+      second = 18
+    }
+  }] = std::queue wrapping: std::deque with 1 element = {{
+      src_id = 17,
+      dst_id = 18,
+      type = 1,
+      remaining_msg_bytes = 2048000,
+      fun_arg = 0xaaaae1a02830,
+      msg_handler = 0xaaaabf9ef084 <AstraSim::Sys::handleEvent(void*)>
+    }},
+  [{
+    first = 537000608,
+    second = {
+      first = 18,
+      second = 19
+    }
+  }] = std::queue wrapping: std::deque with 1 element = {{
+      src_id = 18,
+      dst_id = 19,
+      type = 1,
+      remaining_msg_bytes = 2048000,
+      fun_arg = 0xaaaae66bd2c0,
+      msg_handler = 0xaaaabf9ef084 <AstraSim::Sys::handleEvent(void*)>
+    }},
+  [{
+    first = 539000608,
+    second = {
+      first = 24,
+      second = 25
+    }
+  }] = std::queue wrapping: std::deque with 1 element = {{
+      src_id = 24,
+      dst_id = 25,
+      type = 1,
+      remaining_msg_bytes = 2048000,
+      fun_arg = 0xaaaade8851e0,
+      msg_handler = 0xaaaabf9ef084 <AstraSim::Sys::handleEvent(void*)>
+    }},
+  [{
+    first = 539000608,
+    second = {
+      first = 25,
+      second = 26
+    }
+  }] = std::queue wrapping: std::deque with 1 element = {{
+      src_id = 25,
+      dst_id = 26,
+      type = 1,
+      remaining_msg_bytes = 2048000,
+      fun_arg = 0xaaaade46d9c0,
+      msg_handler = 0xaaaabf9ef084 <AstraSim::Sys::handleEvent(void*)>
+    }},
+  [{
+    first = 539000608,
+    second = {
+      first = 27,
+      second = 24
+    }
+  }] = std::queue wrapping: std::deque with 1 element = {{
+      src_id = 27,
+      dst_id = 24,
+      type = 1,
+      remaining_msg_bytes = 2048000,
+      fun_arg = 0xaaaadf8ea360,
+      msg_handler = 0xaaaabf9ef084 <AstraSim::Sys::handleEvent(void*)>
+    }},
+  [{
+    first = 580000240,
+    second = {
+      first = 16,
+      second = 0
+    }
+  }] = std::queue wrapping: std::deque with 1 element = {{
+      src_id = 16,
+      dst_id = 0,
+      type = 1,
+      remaining_msg_bytes = 2048,
+      fun_arg = 0xaaaadf4cfc10,
+      msg_handler = 0xaaaabf9ef084 <AstraSim::Sys::handleEvent(void*)>
+    }},
+  [{
+    first = 587000240,
+    second = {
+      first = 20,
+      second = 4
+    }
+  }] = std::queue wrapping: std::deque with 1 element = {{
+      src_id = 20,
+      dst_id = 4,
+      type = 1,
+      remaining_msg_bytes = 2048,
+      fun_arg = 0xaaaae1bb6b30,
+      msg_handler = 0xaaaabf9ef084 <AstraSim::Sys::handleEvent(void*)>
+    }},
+  [{
+    first = 593000240,
+    second = {
+      first = 24,
+      second = 8
+    }
+  }] = std::queue wrapping: std::deque with 1 element = {{
+      src_id = 24,
+      dst_id = 8,
+      type = 1,
+      remaining_msg_bytes = 2048,
+      fun_arg = 0xaaaadf0cc340,
+      msg_handler = 0xaaaabf9ef084 <AstraSim::Sys::handleEvent(void*)>
+    }},
+  [{
+    first = 598000240,
+    second = {
+      first = 28,
+      second = 12
+    }
+  }] = std::queue wrapping: std::deque with 1 element = {{
+      src_id = 28,
+      dst_id = 12,
+      type = 1,
+      remaining_msg_bytes = 2048,
+      fun_arg = 0xaaaade89b530,
+      msg_handler = 0xaaaabf9ef084 <AstraSim::Sys::handleEvent(void*)>
+    }},
+  [{
+    first = 600000240,
+    second = {
+      first = 24,
+      second = 16
+    }
+  }] = std::queue wrapping: std::deque with 1 element = {{
+      src_id = 24,
+      dst_id = 16,
+      type = 1,
+      remaining_msg_bytes = 2048,
+      fun_arg = 0xaaaade5021e0,
+      msg_handler = 0xaaaabf9ef084 <AstraSim::Sys::handleEvent(void*)>
+    }},
+  [{
+    first = 601000240,
+    second = {
+      first = 16,
+      second = 28
+    }
+  }] = std::queue wrapping: std::deque with 1 element = {{
+      src_id = 16,
+      dst_id = 28,
+      type = 1,
+      remaining_msg_bytes = 2048,
+      fun_arg = 0xaaaae0bdab90,
+      msg_handler = 0xaaaabf9ef084 <AstraSim::Sys::handleEvent(void*)>
+    }},
+  [{
+    first = 602000240,
+    second = {
+      first = 24,
+      second = 20
+    }
+  }] = std::queue wrapping: std::deque with 1 element = {{
+      src_id = 24,
+      dst_id = 20,
+      type = 1,
+      remaining_msg_bytes = 2048,
+      fun_arg = 0xaaaae0b55f50,
+      msg_handler = 0xaaaabf9ef084 <AstraSim::Sys::handleEvent(void*)>
+    }},
+  [{
+    first = 608000240,
+    second = {
+      first = 17,
+      second = 1
+    }
+  }] = std::queue wrapping: std::deque with 1 element = {{
+      src_id = 17,
+      dst_id = 1,
+      type = 1,
+      remaining_msg_bytes = 2048,
+      fun_arg = 0xaaaae5a18af0,
+      msg_handler = 0xaaaabf9ef084 <AstraSim::Sys::handleEvent(void*)>
+    }},
+  [{
+    first = 615000240,
+    second = {
+      first = 21,
+      second = 5
+    }
+  }] = std::queue wrapping: std::deque with 1 element = {{
+      src_id = 21,
+      dst_id = 5,
+      type = 1,
+      remaining_msg_bytes = 2048,
+      fun_arg = 0xaaaade67a220,
+      msg_handler = 0xaaaabf9ef084 <AstraSim::Sys::handleEvent(void*)>
+    }},
+  [{
+    first = 621000240,
+    second = {
+      first = 25,
+      second = 9
+    }
+  }] = std::queue wrapping: std::deque with 1 element = {{
+      src_id = 25,
+      dst_id = 9,
+      type = 1,
+      remaining_msg_bytes = 2048,
+      fun_arg = 0xaaaae0175e20,
+      msg_handler = 0xaaaabf9ef084 <AstraSim::Sys::handleEvent(void*)>
+    }}
+  ...
+}
+
+received_msg_standby_hash: 28 keys
+$3 = std::map with 28 elements = {
+  [{
+    first = 537000608,
+    second = {
+      first = 19,
+      second = 16
+    }
+  }] = 6144000,
+  [{
+    first = 539000608,
+    second = {
+      first = 26,
+      second = 27
+    }
+  }] = 6144000,
+  [{
+    first = 580000240,
+    second = {
+      first = 0,
+      second = 16
+    }
+  }] = 2048,
+  [{
+    first = 587000240,
+    second = {
+      first = 4,
+      second = 20
+    }
+  }] = 2048,
+  [{
+    first = 593000240,
+    second = {
+      first = 8,
+      second = 24
+    }
+  }] = 2048,
+  [{
+    first = 598000240,
+    second = {
+      first = 12,
+      second = 28
+    }
+  }] = 2048,
+  [{
+    first = 600000240,
+    second = {
+      first = 16,
+      second = 24
+    }
+  }] = 2048,
+  [{
+    first = 601000240,
+    second = {
+      first = 28,
+      second = 16
+    }
+  }] = 2048,
+  [{
+    first = 602000240,
+    second = {
+      first = 20,
+      second = 24
+    }
+  }] = 2048,
+  [{
+    first = 608000240,
+    second = {
+      first = 1,
+      second = 17
+    }
+  }] = 2048,
+  [{
+    first = 615000240,
+    second = {
+      first = 5,
+      second = 21
+    }
+  }] = 2048,
+  [{
+    first = 621000240,
+    second = {
+      first = 9,
+      second = 25
+    }
+  }] = 2048,
+  [{
+    first = 626000240,
+    second = {
+      first = 13,
+      second = 29
+    }
+  }] = 2048,
+  [{
+    first = 629000240,
+    second = {
+      first = 29,
+      second = 17
+    }
+  }] = 2048,
+  [{
+    first = 630000240,
+    second = {
+      first = 21,
+      second = 25
+    }
+  }] = 2048,
+  [{
+    first = 636000240,
+    second = {
+      first = 2,
+      second = 18
+    }
+  }] = 2048
+  ...
+}
+
+Unfinished ranks: 32/32
+Rank 0: pending events 0, running streams 4, ready list empty std::__cxx11::list
+  queue 0, stream 80000240, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Zombie, steps finished 1
+  queue 0, stream 80000241, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 80000242, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 80000243, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+Rank 1: pending events 0, running streams 4, ready list empty std::__cxx11::list
+  queue 0, stream 108000240, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Zombie, steps finished 1
+  queue 0, stream 108000241, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 108000242, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 108000243, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+Rank 2: pending events 0, running streams 4, ready list empty std::__cxx11::list
+  queue 0, stream 136000240, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Zombie, steps finished 1
+  queue 0, stream 136000241, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 136000242, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 136000243, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+Rank 3: pending events 0, running streams 4, ready list empty std::__cxx11::list
+  queue 0, stream 164000240, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Zombie, steps finished 1
+  queue 0, stream 164000241, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 164000242, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 164000243, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+Rank 4: pending events 0, running streams 4, ready list empty std::__cxx11::list
+  queue 0, stream 87000240, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Zombie, steps finished 1
+  queue 0, stream 87000241, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 87000242, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 87000243, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+Rank 5: pending events 0, running streams 4, ready list empty std::__cxx11::list
+  queue 0, stream 115000240, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Zombie, steps finished 1
+  queue 0, stream 115000241, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 115000242, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 115000243, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+Rank 6: pending events 0, running streams 4, ready list empty std::__cxx11::list
+  queue 0, stream 143000240, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Zombie, steps finished 1
+  queue 0, stream 143000241, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 143000242, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 143000243, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+Rank 7: pending events 0, running streams 4, ready list empty std::__cxx11::list
+  queue 0, stream 171000240, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Zombie, steps finished 1
+  queue 0, stream 171000241, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 171000242, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 171000243, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+Rank 8: pending events 0, running streams 4, ready list empty std::__cxx11::list
+  queue 0, stream 93000240, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Zombie, steps finished 1
+  queue 0, stream 93000241, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 93000242, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 93000243, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+Rank 9: pending events 0, running streams 4, ready list empty std::__cxx11::list
+  queue 0, stream 121000240, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Zombie, steps finished 1
+  queue 0, stream 121000241, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 121000242, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 121000243, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+Rank 10: pending events 0, running streams 4, ready list empty std::__cxx11::list
+  queue 0, stream 149000240, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Zombie, steps finished 1
+  queue 0, stream 149000241, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 149000242, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 149000243, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+Rank 11: pending events 0, running streams 4, ready list empty std::__cxx11::list
+  queue 0, stream 177000240, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Zombie, steps finished 1
+  queue 0, stream 177000241, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 177000242, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 177000243, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+Rank 12: pending events 0, running streams 4, ready list empty std::__cxx11::list
+  queue 0, stream 98000240, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Zombie, steps finished 1
+  queue 0, stream 98000241, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 98000242, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 98000243, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+Rank 13: pending events 0, running streams 4, ready list empty std::__cxx11::list
+  queue 0, stream 126000240, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Zombie, steps finished 1
+  queue 0, stream 126000241, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 126000242, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 126000243, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+Rank 14: pending events 0, running streams 4, ready list empty std::__cxx11::list
+  queue 0, stream 154000240, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Zombie, steps finished 1
+  queue 0, stream 154000241, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 154000242, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 154000243, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+Rank 15: pending events 0, running streams 4, ready list empty std::__cxx11::list
+  queue 0, stream 182000240, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Zombie, steps finished 1
+  queue 0, stream 182000241, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 182000242, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 182000243, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+Rank 16: pending events 0, running streams 4, ready list empty std::__cxx11::list
+  queue 0, stream 100000240, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Zombie, steps finished 1
+  queue 0, stream 100000241, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 100000242, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 100000243, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+Rank 17: pending events 0, running streams 4, ready list empty std::__cxx11::list
+  queue 0, stream 37000608, AstraSim::ComType::All_Reduce, state AstraSim::StreamState::Executing, steps finished 1
+  queue 0, stream 37000609, AstraSim::ComType::All_Reduce, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 37000610, AstraSim::ComType::All_Reduce, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 37000611, AstraSim::ComType::All_Reduce, state AstraSim::StreamState::Ready, steps finished 1
+Rank 18: pending events 0, running streams 4, ready list empty std::__cxx11::list
+  queue 0, stream 37000608, AstraSim::ComType::All_Reduce, state AstraSim::StreamState::Executing, steps finished 1
+  queue 0, stream 37000609, AstraSim::ComType::All_Reduce, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 37000610, AstraSim::ComType::All_Reduce, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 37000611, AstraSim::ComType::All_Reduce, state AstraSim::StreamState::Ready, steps finished 1
+Rank 19: pending events 0, running streams 4, ready list empty std::__cxx11::list
+  queue 0, stream 37000608, AstraSim::ComType::All_Reduce, state AstraSim::StreamState::Executing, steps finished 1
+  queue 0, stream 37000609, AstraSim::ComType::All_Reduce, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 37000610, AstraSim::ComType::All_Reduce, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 37000611, AstraSim::ComType::All_Reduce, state AstraSim::StreamState::Ready, steps finished 1
+Rank 20: pending events 0, running streams 4, ready list empty std::__cxx11::list
+  queue 0, stream 102000240, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Zombie, steps finished 1
+  queue 0, stream 102000241, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 102000242, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 102000243, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+Rank 21: pending events 0, running streams 4, ready list empty std::__cxx11::list
+  queue 0, stream 130000240, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Zombie, steps finished 1
+  queue 0, stream 130000241, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 130000242, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 130000243, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+Rank 22: pending events 0, running streams 4, ready list empty std::__cxx11::list
+  queue 0, stream 158000240, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Zombie, steps finished 1
+  queue 0, stream 158000241, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 158000242, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 158000243, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+Rank 23: pending events 0, running streams 4, ready list empty std::__cxx11::list
+  queue 0, stream 186000240, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Zombie, steps finished 1
+  queue 0, stream 186000241, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 186000242, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 186000243, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+Rank 24: pending events 0, running streams 4, ready list empty std::__cxx11::list
+  queue 0, stream 39000608, AstraSim::ComType::All_Reduce, state AstraSim::StreamState::Executing, steps finished 1
+  queue 0, stream 39000609, AstraSim::ComType::All_Reduce, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 39000610, AstraSim::ComType::All_Reduce, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 39000611, AstraSim::ComType::All_Reduce, state AstraSim::StreamState::Ready, steps finished 1
+Rank 25: pending events 0, running streams 4, ready list empty std::__cxx11::list
+  queue 0, stream 39000608, AstraSim::ComType::All_Reduce, state AstraSim::StreamState::Executing, steps finished 1
+  queue 0, stream 39000609, AstraSim::ComType::All_Reduce, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 39000610, AstraSim::ComType::All_Reduce, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 39000611, AstraSim::ComType::All_Reduce, state AstraSim::StreamState::Ready, steps finished 1
+Rank 26: pending events 0, running streams 4, ready list empty std::__cxx11::list
+  queue 0, stream 39000608, AstraSim::ComType::All_Reduce, state AstraSim::StreamState::Executing, steps finished 1
+  queue 0, stream 39000609, AstraSim::ComType::All_Reduce, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 39000610, AstraSim::ComType::All_Reduce, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 39000611, AstraSim::ComType::All_Reduce, state AstraSim::StreamState::Ready, steps finished 1
+Rank 27: pending events 0, running streams 4, ready list empty std::__cxx11::list
+  queue 0, stream 184000240, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Zombie, steps finished 1
+  queue 0, stream 184000241, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 184000242, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 184000243, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+Rank 28: pending events 0, running streams 4, ready list empty std::__cxx11::list
+  queue 0, stream 101000240, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Zombie, steps finished 1
+  queue 0, stream 101000241, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 101000242, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 101000243, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+Rank 29: pending events 0, running streams 4, ready list empty std::__cxx11::list
+  queue 0, stream 129000240, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Zombie, steps finished 1
+  queue 0, stream 129000241, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 129000242, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 129000243, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+Rank 30: pending events 0, running streams 4, ready list empty std::__cxx11::list
+  queue 0, stream 157000240, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Zombie, steps finished 1
+  queue 0, stream 157000241, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 157000242, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 157000243, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+Rank 31: pending events 0, running streams 4, ready list empty std::__cxx11::list
+  queue 0, stream 185000240, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Zombie, steps finished 1
+  queue 0, stream 185000241, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 185000242, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+  queue 0, stream 185000243, AstraSim::ComType::All_to_All, state AstraSim::StreamState::Ready, steps finished 1
+[Inferior 1 (process 1596) detached]

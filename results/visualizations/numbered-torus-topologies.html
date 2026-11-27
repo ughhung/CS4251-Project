@@ -1,0 +1,314 @@
+<section id="sweep-torus-topologies">
+  <h2>Physical torus topologies</h2>
+  <div class="viz-controls">
+    <label class="form-label">
+      Topology
+      <select class="form-select" data-topology aria-label="Topology"></select>
+    </label>
+  </div>
+  <div class="viz-row topology-facts" aria-live="polite" data-facts></div>
+  <div class="viz-row topology-changes" aria-live="polite" data-changes></div>
+  <div class="topology-chart">
+    <svg class="torus-network" role="img" aria-label="Torus switch and GPU map"></svg>
+    <div class="node-labels" data-network-labels aria-hidden="true"></div>
+  </div>
+  <ul class="viz-row topology-legend text-small" aria-label="Diagram legend">
+    <li><span class="legend-node-switch" aria-hidden="true"></span>Switch node ID</li>
+    <li><span class="legend-node-gpu" aria-hidden="true"></span>GPU node ID</li>
+    <li><span class="legend-link" aria-hidden="true"></span>Switch to switch</li>
+    <li><span class="legend-gpu" aria-hidden="true"></span>GPU to switch</li>
+    <li><span class="legend-wrap" aria-hidden="true"></span>Wraparound link</li>
+    <li data-changed-legend hidden><span class="legend-changed" aria-hidden="true"></span>Changed from base</li>
+  </ul>
+  <div class="wrap-links">
+    <h3>Horizontal wraparound links</h3>
+    <div class="topology-chart">
+      <svg class="torus-network" data-horizontal-wrap role="img" aria-label="Horizontal wraparound links"></svg>
+      <div class="node-labels" data-horizontal-labels aria-hidden="true"></div>
+    </div>
+    <h3>Vertical wraparound links</h3>
+    <div class="topology-chart">
+      <svg class="torus-network" data-vertical-wrap role="img" aria-label="Vertical wraparound links"></svg>
+      <div class="node-labels" data-vertical-labels aria-hidden="true"></div>
+    </div>
+  </div>
+</section>
+<style>
+  #sweep-torus-topologies {
+    --plot-background: var(--background, Canvas);
+    --plot-foreground: var(--foreground, CanvasText);
+    --fabric: color-mix(in srgb, var(--plot-foreground) 75%, var(--plot-background));
+    --wrap: var(--viz-series-2, var(--purple, GrayText));
+    --gpu: var(--viz-series-1, var(--blue, LinkText));
+    --changed: var(--orange, var(--viz-series-3, LinkText));
+    --gpu-fill: color-mix(in srgb, var(--gpu) 16%, var(--plot-background));
+    --switch-fill: color-mix(in srgb, var(--plot-foreground) 5%, var(--plot-background));
+    display: grid;
+    gap: calc(var(--font-size-base, 1rem) * .7);
+    color: var(--plot-foreground);
+  }
+  #sweep-torus-topologies .topology-facts {
+    color: var(--muted-foreground, var(--plot-foreground));
+  }
+  #sweep-torus-topologies .topology-changes { font-weight: 500; }
+  #sweep-torus-topologies .topology-chart { position: relative; }
+  #sweep-torus-topologies .node-labels {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  #sweep-torus-topologies .node-label {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    color: var(--plot-foreground);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  #sweep-torus-topologies .torus-network {
+    display: block;
+    width: 100%;
+    height: 270px;
+    overflow: hidden;
+  }
+  #sweep-torus-topologies .torus-network .switch-frame {
+    fill: var(--switch-fill);
+    stroke: var(--fabric);
+  }
+  #sweep-torus-topologies .torus-network .gpu-fill { fill: var(--gpu-fill); }
+  #sweep-torus-topologies .torus-network .fabric-link { stroke: var(--fabric); stroke-width: 2; }
+  #sweep-torus-topologies .torus-network .gpu-link { stroke: var(--gpu); stroke-width: 1.5; }
+  #sweep-torus-topologies .torus-network .wrap-link {
+    stroke: var(--wrap);
+    stroke-dasharray: 3 3;
+    stroke-width: 2;
+  }
+  #sweep-torus-topologies .torus-network .changed-link {
+    stroke: var(--changed);
+    stroke-width: 3;
+  }
+  #sweep-torus-topologies .torus-network .changed-gpu {
+    fill: color-mix(in srgb, var(--changed) 22%, var(--plot-background));
+    stroke: var(--changed);
+  }
+  #sweep-torus-topologies .wrap-links {
+    display: grid;
+    gap: calc(var(--font-size-base) * .25);
+  }
+  #sweep-torus-topologies .wrap-links .torus-network { height: 34px; }
+  #sweep-torus-topologies .topology-legend {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+  #sweep-torus-topologies .topology-legend li {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--font-size-base) * .35);
+  }
+  #sweep-torus-topologies .topology-legend li[hidden] { display: none; }
+  #sweep-torus-topologies .topology-legend span {
+    display: inline-block;
+    width: calc(var(--font-size-base) * 1.1);
+  }
+  #sweep-torus-topologies .legend-gpu { border-top: 2px solid var(--gpu); }
+  #sweep-torus-topologies .legend-link { border-top: 2px solid var(--fabric); }
+  #sweep-torus-topologies .legend-wrap { border-top: 2px dashed var(--wrap); }
+  #sweep-torus-topologies .legend-changed { border-top: 3px solid var(--changed); }
+  #sweep-torus-topologies .legend-node-switch,
+  #sweep-torus-topologies .legend-node-gpu {
+    height: calc(var(--font-size-base) * .7);
+    box-sizing: border-box;
+  }
+  #sweep-torus-topologies .legend-node-switch {
+    background: var(--switch-fill);
+    border: 1px solid var(--fabric);
+    border-radius: 3px;
+  }
+  #sweep-torus-topologies .legend-node-gpu {
+    background: var(--gpu-fill);
+    border: 1px solid var(--gpu);
+    border-radius: 6px;
+  }
+</style>
+<script id="sweep-torus-data" type="application/json">
+{"torus_base_uniform":{"columns":8,"gpus":[[0],[1],[2],[3],[4],[5],[6],[7],[8],[9],[10],[11],[12],[13],[14],[15],[16],[17],[18],[19],[20],[21],[22],[23],[24],[25],[26],[27],[28],[29],[30],[31]],"fabric":[[0,1],[0,8],[1,2],[1,9],[2,3],[2,10],[3,4],[3,11],[4,5],[4,12],[5,6],[5,13],[6,7],[6,14],[7,0],[7,15],[8,9],[8,16],[9,10],[9,17],[10,11],[10,18],[11,12],[11,19],[12,13],[12,20],[13,14],[13,21],[14,15],[14,22],[15,8],[15,23],[16,17],[16,24],[17,18],[17,25],[18,19],[18,26],[19,20],[19,27],[20,21],[20,28],[21,22],[21,29],[22,23],[22,30],[23,16],[23,31],[24,25],[24,0],[25,26],[25,1],[26,27],[26,2],[27,28],[27,3],[28,29],[28,4],[29,30],[29,5],[30,31],[30,6],[31,24],[31,7]],"logical":["4","8"],"host_ns":500,"fabric_ns":500,"rate":"200Gbps","twist":0},
+"torus_twisted_uniform":{"columns":8,"gpus":[[0],[1],[2],[3],[4],[5],[6],[7],[8],[9],[10],[11],[12],[13],[14],[15],[16],[17],[18],[19],[20],[21],[22],[23],[24],[25],[26],[27],[28],[29],[30],[31]],"fabric":[[0,1],[0,8],[1,2],[1,9],[2,3],[2,10],[3,4],[3,11],[4,5],[4,12],[5,6],[5,13],[6,7],[6,14],[7,0],[7,15],[8,9],[8,16],[9,10],[9,17],[10,11],[10,18],[11,12],[11,19],[12,13],[12,20],[13,14],[13,21],[14,15],[14,22],[15,8],[15,23],[16,17],[16,24],[17,18],[17,25],[18,19],[18,26],[19,20],[19,27],[20,21],[20,28],[21,22],[21,29],[22,23],[22,30],[23,16],[23,31],[24,25],[24,4],[25,26],[25,5],[26,27],[26,6],[27,28],[27,7],[28,29],[28,0],[29,30],[29,1],[30,31],[30,2],[31,24],[31,3]],"logical":["4","8"],"host_ns":500,"fabric_ns":500,"rate":"200Gbps","twist":4},
+"torus_aligned_uniform":{"columns":8,"gpus":[[0],[4],[8],[12],[16],[20],[24],[28],[1],[5],[9],[13],[17],[21],[25],[29],[2],[6],[10],[14],[18],[22],[26],[30],[3],[7],[11],[15],[19],[23],[27],[31]],"fabric":[[0,1],[0,8],[1,2],[1,9],[2,3],[2,10],[3,4],[3,11],[4,5],[4,12],[5,6],[5,13],[6,7],[6,14],[7,0],[7,15],[8,9],[8,16],[9,10],[9,17],[10,11],[10,18],[11,12],[11,19],[12,13],[12,20],[13,14],[13,21],[14,15],[14,22],[15,8],[15,23],[16,17],[16,24],[17,18],[17,25],[18,19],[18,26],[19,20],[19,27],[20,21],[20,28],[21,22],[21,29],[22,23],[22,30],[23,16],[23,31],[24,25],[24,0],[25,26],[25,1],[26,27],[26,2],[27,28],[27,3],[28,29],[28,4],[29,30],[29,5],[30,31],[30,6],[31,24],[31,7]],"logical":["4","8"],"host_ns":500,"fabric_ns":500,"rate":"200Gbps","twist":0},
+"torus_random1_uniform":{"columns":8,"gpus":[[15],[5],[26],[24],[7],[6],[18],[8],[31],[10],[3],[2],[19],[13],[22],[23],[9],[1],[30],[11],[20],[16],[14],[21],[27],[28],[0],[29],[4],[17],[12],[25]],"fabric":[[0,1],[0,8],[1,2],[1,9],[2,3],[2,10],[3,4],[3,11],[4,5],[4,12],[5,6],[5,13],[6,7],[6,14],[7,0],[7,15],[8,9],[8,16],[9,10],[9,17],[10,11],[10,18],[11,12],[11,19],[12,13],[12,20],[13,14],[13,21],[14,15],[14,22],[15,8],[15,23],[16,17],[16,24],[17,18],[17,25],[18,19],[18,26],[19,20],[19,27],[20,21],[20,28],[21,22],[21,29],[22,23],[22,30],[23,16],[23,31],[24,25],[24,0],[25,26],[25,1],[26,27],[26,2],[27,28],[27,3],[28,29],[28,4],[29,30],[29,5],[30,31],[30,6],[31,24],[31,7]],"logical":["4","8"],"host_ns":500,"fabric_ns":500,"rate":"200Gbps","twist":0},
+"torus_random2_uniform":{"columns":8,"gpus":[[6],[18],[30],[31],[7],[26],[20],[9],[22],[23],[8],[28],[15],[16],[10],[14],[0],[11],[2],[21],[5],[24],[12],[25],[19],[1],[27],[17],[13],[4],[29],[3]],"fabric":[[0,1],[0,8],[1,2],[1,9],[2,3],[2,10],[3,4],[3,11],[4,5],[4,12],[5,6],[5,13],[6,7],[6,14],[7,0],[7,15],[8,9],[8,16],[9,10],[9,17],[10,11],[10,18],[11,12],[11,19],[12,13],[12,20],[13,14],[13,21],[14,15],[14,22],[15,8],[15,23],[16,17],[16,24],[17,18],[17,25],[18,19],[18,26],[19,20],[19,27],[20,21],[20,28],[21,22],[21,29],[22,23],[22,30],[23,16],[23,31],[24,25],[24,0],[25,26],[25,1],[26,27],[26,2],[27,28],[27,3],[28,29],[28,4],[29,30],[29,5],[30,31],[30,6],[31,24],[31,7]],"logical":["4","8"],"host_ns":500,"fabric_ns":500,"rate":"200Gbps","twist":0},
+"torus_base_hostlink":{"columns":8,"gpus":[[0],[1],[2],[3],[4],[5],[6],[7],[8],[9],[10],[11],[12],[13],[14],[15],[16],[17],[18],[19],[20],[21],[22],[23],[24],[25],[26],[27],[28],[29],[30],[31]],"fabric":[[0,1],[0,8],[1,2],[1,9],[2,3],[2,10],[3,4],[3,11],[4,5],[4,12],[5,6],[5,13],[6,7],[6,14],[7,0],[7,15],[8,9],[8,16],[9,10],[9,17],[10,11],[10,18],[11,12],[11,19],[12,13],[12,20],[13,14],[13,21],[14,15],[14,22],[15,8],[15,23],[16,17],[16,24],[17,18],[17,25],[18,19],[18,26],[19,20],[19,27],[20,21],[20,28],[21,22],[21,29],[22,23],[22,30],[23,16],[23,31],[24,25],[24,0],[25,26],[25,1],[26,27],[26,2],[27,28],[27,3],[28,29],[28,4],[29,30],[29,5],[30,31],[30,6],[31,24],[31,7]],"logical":["4","8"],"host_ns":1,"fabric_ns":500,"rate":"200Gbps","twist":0},
+"torus_twisted_hostlink":{"columns":8,"gpus":[[0],[1],[2],[3],[4],[5],[6],[7],[8],[9],[10],[11],[12],[13],[14],[15],[16],[17],[18],[19],[20],[21],[22],[23],[24],[25],[26],[27],[28],[29],[30],[31]],"fabric":[[0,1],[0,8],[1,2],[1,9],[2,3],[2,10],[3,4],[3,11],[4,5],[4,12],[5,6],[5,13],[6,7],[6,14],[7,0],[7,15],[8,9],[8,16],[9,10],[9,17],[10,11],[10,18],[11,12],[11,19],[12,13],[12,20],[13,14],[13,21],[14,15],[14,22],[15,8],[15,23],[16,17],[16,24],[17,18],[17,25],[18,19],[18,26],[19,20],[19,27],[20,21],[20,28],[21,22],[21,29],[22,23],[22,30],[23,16],[23,31],[24,25],[24,4],[25,26],[25,5],[26,27],[26,6],[27,28],[27,7],[28,29],[28,0],[29,30],[29,1],[30,31],[30,2],[31,24],[31,3]],"logical":["4","8"],"host_ns":1,"fabric_ns":500,"rate":"200Gbps","twist":4},
+"torus_aligned_hostlink":{"columns":8,"gpus":[[0],[4],[8],[12],[16],[20],[24],[28],[1],[5],[9],[13],[17],[21],[25],[29],[2],[6],[10],[14],[18],[22],[26],[30],[3],[7],[11],[15],[19],[23],[27],[31]],"fabric":[[0,1],[0,8],[1,2],[1,9],[2,3],[2,10],[3,4],[3,11],[4,5],[4,12],[5,6],[5,13],[6,7],[6,14],[7,0],[7,15],[8,9],[8,16],[9,10],[9,17],[10,11],[10,18],[11,12],[11,19],[12,13],[12,20],[13,14],[13,21],[14,15],[14,22],[15,8],[15,23],[16,17],[16,24],[17,18],[17,25],[18,19],[18,26],[19,20],[19,27],[20,21],[20,28],[21,22],[21,29],[22,23],[22,30],[23,16],[23,31],[24,25],[24,0],[25,26],[25,1],[26,27],[26,2],[27,28],[27,3],[28,29],[28,4],[29,30],[29,5],[30,31],[30,6],[31,24],[31,7]],"logical":["4","8"],"host_ns":1,"fabric_ns":500,"rate":"200Gbps","twist":0},
+"torus_random1_hostlink":{"columns":8,"gpus":[[15],[5],[26],[24],[7],[6],[18],[8],[31],[10],[3],[2],[19],[13],[22],[23],[9],[1],[30],[11],[20],[16],[14],[21],[27],[28],[0],[29],[4],[17],[12],[25]],"fabric":[[0,1],[0,8],[1,2],[1,9],[2,3],[2,10],[3,4],[3,11],[4,5],[4,12],[5,6],[5,13],[6,7],[6,14],[7,0],[7,15],[8,9],[8,16],[9,10],[9,17],[10,11],[10,18],[11,12],[11,19],[12,13],[12,20],[13,14],[13,21],[14,15],[14,22],[15,8],[15,23],[16,17],[16,24],[17,18],[17,25],[18,19],[18,26],[19,20],[19,27],[20,21],[20,28],[21,22],[21,29],[22,23],[22,30],[23,16],[23,31],[24,25],[24,0],[25,26],[25,1],[26,27],[26,2],[27,28],[27,3],[28,29],[28,4],[29,30],[29,5],[30,31],[30,6],[31,24],[31,7]],"logical":["4","8"],"host_ns":1,"fabric_ns":500,"rate":"200Gbps","twist":0},
+"torus_random2_hostlink":{"columns":8,"gpus":[[6],[18],[30],[31],[7],[26],[20],[9],[22],[23],[8],[28],[15],[16],[10],[14],[0],[11],[2],[21],[5],[24],[12],[25],[19],[1],[27],[17],[13],[4],[29],[3]],"fabric":[[0,1],[0,8],[1,2],[1,9],[2,3],[2,10],[3,4],[3,11],[4,5],[4,12],[5,6],[5,13],[6,7],[6,14],[7,0],[7,15],[8,9],[8,16],[9,10],[9,17],[10,11],[10,18],[11,12],[11,19],[12,13],[12,20],[13,14],[13,21],[14,15],[14,22],[15,8],[15,23],[16,17],[16,24],[17,18],[17,25],[18,19],[18,26],[19,20],[19,27],[20,21],[20,28],[21,22],[21,29],[22,23],[22,30],[23,16],[23,31],[24,25],[24,0],[25,26],[25,1],[26,27],[26,2],[27,28],[27,3],[28,29],[28,4],[29,30],[29,5],[30,31],[30,6],[31,24],[31,7]],"logical":["4","8"],"host_ns":1,"fabric_ns":500,"rate":"200Gbps","twist":0},
+"torus2_base":{"columns":4,"gpus":[[0,1],[2,3],[4,5],[6,7],[8,9],[10,11],[12,13],[14,15],[16,17],[18,19],[20,21],[22,23],[24,25],[26,27],[28,29],[30,31]],"fabric":[[0,1],[0,4],[1,2],[1,5],[2,3],[2,6],[3,0],[3,7],[4,5],[4,8],[5,6],[5,9],[6,7],[6,10],[7,4],[7,11],[8,9],[8,12],[9,10],[9,13],[10,11],[10,14],[11,8],[11,15],[12,13],[12,0],[13,14],[13,1],[14,15],[14,2],[15,12],[15,3]],"logical":["2","4","4"],"host_ns":100,"fabric_ns":500,"rate":"200Gbps","twist":0},
+"torus2_aligned":{"columns":4,"gpus":[[0,4],[8,12],[16,20],[24,28],[1,5],[9,13],[17,21],[25,29],[2,6],[10,14],[18,22],[26,30],[3,7],[11,15],[19,23],[27,31]],"fabric":[[0,1],[0,4],[1,2],[1,5],[2,3],[2,6],[3,0],[3,7],[4,5],[4,8],[5,6],[5,9],[6,7],[6,10],[7,4],[7,11],[8,9],[8,12],[9,10],[9,13],[10,11],[10,14],[11,8],[11,15],[12,13],[12,0],[13,14],[13,1],[14,15],[14,2],[15,12],[15,3]],"logical":["2","4","4"],"host_ns":100,"fabric_ns":500,"rate":"200Gbps","twist":0},
+"torus2_random1":{"columns":4,"gpus":[[5,15],[24,26],[6,7],[8,18],[10,31],[2,3],[13,19],[22,23],[1,9],[11,30],[16,20],[14,21],[27,28],[0,29],[4,17],[12,25]],"fabric":[[0,1],[0,4],[1,2],[1,5],[2,3],[2,6],[3,0],[3,7],[4,5],[4,8],[5,6],[5,9],[6,7],[6,10],[7,4],[7,11],[8,9],[8,12],[9,10],[9,13],[10,11],[10,14],[11,8],[11,15],[12,13],[12,0],[13,14],[13,1],[14,15],[14,2],[15,12],[15,3]],"logical":["2","4","4"],"host_ns":100,"fabric_ns":500,"rate":"200Gbps","twist":0},
+"torus2_random2":{"columns":4,"gpus":[[6,18],[30,31],[7,26],[9,20],[22,23],[8,28],[15,16],[10,14],[0,11],[2,21],[5,24],[12,25],[1,19],[17,27],[4,13],[3,29]],"fabric":[[0,1],[0,4],[1,2],[1,5],[2,3],[2,6],[3,0],[3,7],[4,5],[4,8],[5,6],[5,9],[6,7],[6,10],[7,4],[7,11],[8,9],[8,12],[9,10],[9,13],[10,11],[10,14],[11,8],[11,15],[12,13],[12,0],[13,14],[13,1],[14,15],[14,2],[15,12],[15,3]],"logical":["2","4","4"],"host_ns":100,"fabric_ns":500,"rate":"200Gbps","twist":0}}
+</script>
+<script>
+(() => {
+  const root = document.getElementById('sweep-torus-topologies');
+  const data = JSON.parse(document.getElementById('sweep-torus-data').textContent);
+  const select = root.querySelector('[data-topology]');
+  const facts = root.querySelector('[data-facts]');
+  const changes = root.querySelector('[data-changes]');
+  const changedLegend = root.querySelector('[data-changed-legend]');
+  const svg = root.querySelector('.torus-network');
+  const networkLabels = root.querySelector('[data-network-labels]');
+  const horizontalWrap = root.querySelector('[data-horizontal-wrap]');
+  const horizontalLabels = root.querySelector('[data-horizontal-labels]');
+  const verticalWrap = root.querySelector('[data-vertical-wrap]');
+  const verticalLabels = root.querySelector('[data-vertical-labels]');
+  const svgNS = 'http://www.w3.org/2000/svg';
+  let selected = 'torus_base_uniform';
+  let changedGpuRanks = new Set();
+  let changedFabricEdges = new Set();
+  let selectedLocally = false;
+  const edgeKey = (a, b) => a < b ? `${a}:${b}` : `${b}:${a}`;
+
+  for (const name of Object.keys(data)) select.add(new Option(name, name));
+
+  function mark(group, tag, attrs, text) {
+    const element = document.createElementNS(svgNS, tag);
+    for (const [key, value] of Object.entries(attrs)) element.setAttribute(key, value);
+    if (text !== undefined) element.textContent = text;
+    group.append(element);
+    return element;
+  }
+
+  function line(parent, type, a, b) {
+    mark(parent, 'line', {x1: a[0], y1: a[1], x2: b[0], y2: b[1],
+      stroke: 'currentColor', 'stroke-width': 2, class: type});
+  }
+
+  function node(parent, labels, [x, y], label, type, tip, changed = false) {
+    const gpu = type === 'gpu';
+    const width = gpu ? 26 : 30;
+    const height = gpu ? 18 : 24;
+    const attributes = {x: x - width / 2, y: y - height / 2, width, height,
+      fill: 'Canvas', rx: gpu ? 7 : 4,
+      class: gpu ? (changed ? 'gpu-fill changed-gpu' : 'gpu-fill') : 'switch-frame'};
+    if (tip) attributes['data-tooltip'] = tip;
+    mark(parent, 'rect', attributes);
+    const number = document.createElement('span');
+    number.className = 'node-label tabular-nums';
+    number.style.left = `${x}px`;
+    number.style.top = `${y}px`;
+    number.textContent = String(label);
+    labels.append(number);
+  }
+
+  function drawWrap(canvas, labels, pairs, width, axis) {
+    const columns = Math.max(1, Math.min(pairs.length, Math.floor(width / 87)));
+    const height = 34 * Math.ceil(pairs.length / columns);
+    canvas.style.height = `${height}px`;
+    canvas.setAttribute('viewBox', `0 0 ${width} ${height}`);
+    canvas.setAttribute('aria-label', `${axis} wraparound links: ${pairs.map(([a, b]) =>
+      `switch ${a + 32} to switch ${b + 32}`).join('; ')}`);
+    canvas.replaceChildren();
+    labels.replaceChildren();
+    pairs.forEach(([a, b], index) => {
+      const x = (index % columns + .5) * width / columns;
+      const y = 17 + 34 * Math.floor(index / columns);
+      const left = [x - 27, y];
+      const right = [x + 27, y];
+      line(canvas, changedFabricEdges.has(edgeKey(a, b)) ? 'wrap-link changed-link' : 'wrap-link',
+        left, right);
+      node(canvas, labels, left, a + 32, 'switch');
+      node(canvas, labels, right, b + 32, 'switch');
+    });
+  }
+
+  function draw() {
+    const item = data[selected];
+    const width = Math.floor(svg.getBoundingClientRect().width);
+    if (!item || width === 0) return;
+    const left = item.columns === 4 ? 42 : 29;
+    const gap = (width - 2 * left) / (item.columns - 1);
+    const top = 22;
+    const rowGap = 67;
+    const height = 270;
+    const at = (index) => [index % item.columns, Math.floor(index / item.columns)];
+    const pos = (index) => {
+      const [column, row] = at(index);
+      return [left + column * gap, top + row * rowGap];
+    };
+    svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+    svg.setAttribute('aria-label', `${selected}, ${item.columns} columns by 4 rows, with physical switch links and GPU attachments. Wraparound edges are shown below.`);
+    svg.replaceChildren();
+    networkLabels.replaceChildren();
+    const connectors = mark(svg, 'g', {'aria-hidden': 'true'});
+    const switches = mark(svg, 'g', {});
+    const horizontal = [];
+    const vertical = [];
+
+    for (const [a, b] of item.fabric) {
+      const [ax, ay] = at(a);
+      const [bx, by] = at(b);
+      if (ay === by && Math.abs(ax - bx) > 1) {
+        horizontal.push(ax < bx ? [a, b] : [b, a]);
+      } else if (Math.abs(ay - by) === 3) {
+        vertical.push(ay < by ? [a, b] : [b, a]);
+      } else {
+        line(connectors, 'fabric-link', pos(a), pos(b));
+      }
+    }
+
+    item.gpus.forEach((ranks, index) => {
+      const [x, y] = pos(index);
+      const id = index + 32;
+      const name = ranks.length === 1 ? `GPU ${ranks[0]}` : `GPUs ${ranks.join(' and ')}`;
+      const tip = `Switch ${id}: ${name}`;
+      node(switches, networkLabels, [x, y], id, 'switch', tip);
+      ranks.forEach((rank, gpu) => {
+        const offset = ranks.length === 1 ? 15 : (gpu === 0 ? -21 : 21);
+        const end = [x + offset, y + 34];
+        const changed = changedGpuRanks.has(rank);
+        line(connectors, changed ? 'gpu-link changed-link' : 'gpu-link', [x, y], end);
+        node(switches, networkLabels, end, rank, 'gpu', `GPU ${rank} connects to switch ${id}`, changed);
+      });
+    });
+    drawWrap(horizontalWrap, horizontalLabels, horizontal, width, 'Horizontal');
+    drawWrap(verticalWrap, verticalLabels, vertical.sort((a, b) => a[0] - b[0]), width, 'Vertical');
+  }
+
+  function show(name) {
+    if (Object.hasOwn(data, name)) selected = name;
+    select.value = selected;
+    const item = data[selected];
+    const base = data[item.columns === 4 ? 'torus2_base' : 'torus_base_uniform'];
+    const baseGpuSwitch = new Map(base.gpus.flatMap((ranks, index) => ranks.map(rank => [rank, index])));
+    changedGpuRanks = new Set(item.gpus.flatMap((ranks, index) =>
+      ranks.filter(rank => baseGpuSwitch.get(rank) !== index)));
+    const baseFabric = new Set(base.fabric.map(([a, b]) => edgeKey(a, b)));
+    changedFabricEdges = new Set(item.fabric.map(([a, b]) => edgeKey(a, b))
+      .filter(key => !baseFabric.has(key)));
+    const exampleWrap = item.fabric.find(([a, b]) => changedFabricEdges.has(edgeKey(a, b)));
+    const latency = item.host_ns === base.host_ns ? '' : ` · GPU link delay ${base.host_ns} → ${item.host_ns} ns`;
+    const example = exampleWrap ? ` · for example, switches ${exampleWrap[0] + 32} ↔ ${exampleWrap[1] + 32}` : '';
+    changes.textContent = `Compared with the ${item.columns} × 4 base: ${changedFabricEdges.size} fabric links rewired · ${changedGpuRanks.size} GPU attachments moved${example}${latency}`;
+    changedLegend.hidden = !changedGpuRanks.size && !changedFabricEdges.size;
+    facts.replaceChildren(...[
+      `${item.columns} × 4 physical grid · ${item.gpus.length} switches · 32 GPUs`,
+      `Logical ${item.logical.join(' × ')}`,
+      `GPU link ${item.host_ns} ns · Fabric ${item.fabric_ns} ns · ${item.rate}`,
+      ...(item.twist ? [`Vertical wrap shifted ${item.twist} columns`] : []),
+    ].map(text => Object.assign(document.createElement('span'), {textContent: text})));
+    draw();
+  }
+
+  show(window.openai?.widgetState?.modelContent?.topology);
+  new ResizeObserver(draw).observe(svg);
+  select.addEventListener('change', () => {
+    selectedLocally = true;
+    show(select.value);
+    window.openai?.setWidgetState?.({modelContent: {topology: selected}})?.catch(() => {});
+  });
+  window.addEventListener('openai:set_globals', event => {
+    const state = event.detail?.globals?.widgetState;
+    const saved = state?.modelContent?.topology;
+    if (!selectedLocally && Object.hasOwn(data, saved)) show(saved);
+  });
+})();
+</script>

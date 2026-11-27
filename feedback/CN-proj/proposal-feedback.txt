@@ -1,0 +1,28 @@
+First we attended office Hours:
+* Our current project idea is not deep enough yet if we are only comparing topologies using AllReduce and AllToAll and then measuring completion time, FCT, congestion, etc.
+* He wants us to start more from the actual AI workload/application instead of starting from the topology. Basically, we should ask what kind of model or workload we are simulating, such as training or inference, and then identify what communication patterns/collectives that workload actually uses.
+* He mentioned that collectives change/evolve over time, so we should look at more recent AI workloads and make sure the communication patterns we test are actually relevant to current systems.
+* Instead of only using AllReduce and AllToAll as generic workloads, we should probably look at multiple realistic workload types and figure out which collectives they use and where the network stress comes from.
+* One way he suggested adding more substance was to increase the number of workloads we test.
+
+1. 
+
+* The project should become more like:
+AI workload → communication pattern/collectives → stress on the network → how each physical topology handles it → performance results.
+* He wants the final result to be more than just saying which topology is fastest. We should be able to answer something like:
+Which topology works better for which type of AI workload, and why?
+* He also wants a deeper root-cause analysis of the results. A heat map or a chart showing high throughput or low latency by itself is not enough.
+* We should explain in detail what is happening inside the network, for example:
+a certain workload creates a specific traffic pattern → certain links become bottlenecks → congestion/FCT increases → GPUs wait longer → workload completion time gets worse.
+* He emphasized finding fundamental reasons why one topology performs better or worse. For example, if the only problem is that a topology has slower links and increasing the link bandwidth makes the problem disappear, then that is probably not a very interesting or fundamental topology result.
+* A stronger result would be something structural, like a topology naturally causing traffic to concentrate on certain links, having fewer alternate paths, longer paths, or some other issue that still matters even when we change basic parameters.
+
+After attending office hours and incorporating the feedback, we submitted and got final feedback on canvas:
+This is an interesting direction. For the first progress report, I would like to see a clearer explanation of what your contribution will be beyond running AstraSim with its existing capabilities, since AstraSim already includes a variety of network topologies and workload traces out of the box.In particular, I would like to see at least two of the following:
+
+* The incorporation of new traces that are not currently available in AstraSim.
+* The evaluation of new network topologies that are not currently modeled.
+* An exploration of targeted modifications to existing topologies that could improve performance without requiring a complete redesign.
+
+The report should also include a clear evaluation plan, including the baselines you will compare against and the metrics you will use.
+Negative results are perfectly acceptable. Demonstrating that a new topology or modification does not improve performance is still a valuable outcome, provided the evaluation is thorough and well motivated.

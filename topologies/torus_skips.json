@@ -1,0 +1,8 @@
+{
+  "torus2_base": {
+    "straggler": {
+      "reason": "Reproducible collective deadlock at 41.578 ms simulated time. GDB found 32 pending receive keys and zero pending sends. In communicator 5, rank 0 was executing AllGather stream 5000297 while ranks 8, 16, and 24 were still executing AllReduce stream 5000296.",
+      "evidence": "results/run7_debugger.txt"
+    }
+  }
+}

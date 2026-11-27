@@ -1,0 +1,39 @@
+After submitting on canvas, we got the following feedback
+Technical: 
+
+1. Regarding the chosen traces: while you do a decent job describing the traces. It is unclear why any of these traces would be an interesting test case for either of your topologies. The selection of your traces and topologies should align with some hypothesis for each topology-trace pair that argues from first principles about what the performance should be. Subsequently, your experiments test these hypotheses, allowing you to comment on agreements and disagreements.
+
+ 
+
+2. Analysis mistake: your analysis makes conflicting statements (-20pts). In Section 4, you analyze the maximum supported workload and conclude that the busiest link in the FatTree-Dense case is ~18% utilized, leading the conclusion that " each network could carry roughly 5 to 6 times more traffic" However, your analysis in Section 3 shows that in the Dense-FatTree case "the leaf switches build up queues (4.4 MiB), so messages sit waiting, and the slowest one takes 4.8 times longer than it would alone." Both statements cannot be true.
+
+ 
+
+3. Analysis rigor: this comment is more for the final report. Your analysis is pretty much a narration of the most basic results obtained from each experiment. In other words, it describes the "what" not the "how" or "why." More precisely, after reading your report, I cannot form a conclusion about how to select a topology for a given workload. Your final report should make these points very clear.
+
+
+Formatting: make sure that statements based on earlier research are properly supported by citations. Also, systems you have used like STAGE and Astra-Sim are properly cited. The format of this report should have followed and extended the format of your first progress report (-10pts). Your final report should real like a self contained paper: introduction, motivation, challenges, methodology, results, and related work (as mentioned in the syllabus). Also, please add captions to your tables and figures.
+
+After seeing the feedback on project report 2 in canvas, we went to office hours and got the below detailed feedback:
+reason for choosing traces, some research with this. ground these traces in research, and create hypothesis from it. we believe that this trace will do this on topology bc we did research xyz
+
+if traces overlap (traces work on both topology) , do a different trace or a different topology (vice versa) so that it’s different or if seemingly the traces are different inherently explain why similar results
+
+for hypothesis: look at traces and topology, form a hypothesis on why traces work well on one topology and not the other etc (just an idea). every trace should comment on every topology for hypothesis (what is “good”? - probably will find in research)
+
+MoE on Torus
+MoE on Fat Tree
+Dense baseline on Torus etc
+
+topology modification: from result and old hypothesis, modify topology based on result and come up with sub hypothesis and answer it with new results from modified topology
+
+modification of topology should be grounded on research VERY IMPORTANT
+
+“MoE on Torus sucked. so we try to modify it this way”
+
+“dense baseline on Torus worked well, so we try to modify it this way” 
+
+“see more how and why”: workload created this pattern and this topology has this component and that’s why it didn’t work
+
+
+

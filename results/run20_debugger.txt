@@ -1,0 +1,68 @@
+[New LWP 1626]
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/aarch64-linux-gnu/libthread_db.so.1".
+0x0000aaaac2b020b8 in ns3::Node::GetNDevices() const@plt ()
+  Id   Target Id                                          Frame 
+* 1    Thread 0xffff8a4de880 (LWP 1589) "ns3.42-AstraSim" 0x0000aaaac2b020b8 in ns3::Node::GetNDevices() const@plt ()
+  2    Thread 0xffff879ae020 (LWP 1626) "ns3.42-AstraSim" __futex_abstimed_wait_common64 (private=0, cancel=true, abstime=0x0, op=393, expected=0, futex_word=0xaaab0056f568) at ./nptl/futex-internal.c:57
+
+Thread 2 (Thread 0xffff879ae020 (LWP 1626) "ns3.42-AstraSim"):
+#0  __futex_abstimed_wait_common64 (private=0, cancel=true, abstime=0x0, op=393, expected=0, futex_word=0xaaab0056f568) at ./nptl/futex-internal.c:57
+#1  __futex_abstimed_wait_common (cancel=true, private=0, abstime=0x0, clockid=0, expected=0, futex_word=0xaaab0056f568) at ./nptl/futex-internal.c:87
+#2  __GI___futex_abstimed_wait_cancelable64 (futex_word=futex_word@entry=0xaaab0056f568, expected=expected@entry=0, clockid=clockid@entry=0, abstime=abstime@entry=0x0, private=private@entry=0) at ./nptl/futex-internal.c:139
+#3  0x0000ffff882cf6a4 in __pthread_cond_wait_common (abstime=0x0, clockid=0, mutex=0xaaab0056f510, cond=0xaaab0056f540) at ./nptl/pthread_cond_wait.c:503
+#4  ___pthread_cond_wait (cond=0xaaab0056f540, mutex=0xaaab0056f510) at ./nptl/pthread_cond_wait.c:627
+#5  0x0000aaaac2d84ca8 in std::condition_variable::wait<spdlog::details::mpmc_blocking_queue<spdlog::details::async_msg>::dequeue(spdlog::details::async_msg&)::{lambda()#1}>(std::unique_lock<std::mutex>&, spdlog::details::mpmc_blocking_queue<spdlog::details::async_msg>::dequeue(spdlog::details::async_msg&)::{lambda()#1}) (this=0xaaab0056f540, __lock=..., __p=...) at /usr/include/c++/11/condition_variable:103
+#6  0x0000aaaac2d844cc in spdlog::details::mpmc_blocking_queue<spdlog::details::async_msg>::dequeue (this=0xaaab0056f510, popped_item=...) at /app/astra-sim/extern/helper/spdlog/include/spdlog/details/mpmc_blocking_q.h:85
+#7  0x0000aaaac2d81e4c in spdlog::details::thread_pool::process_next_msg_ (this=0xaaab0056f510) at /app/astra-sim/extern/helper/spdlog/include/spdlog/details/thread_pool-inl.h:102
+#8  0x0000aaaac2d81df4 in spdlog::details::thread_pool::worker_loop_ (this=0xaaab0056f510) at /app/astra-sim/extern/helper/spdlog/include/spdlog/details/thread_pool-inl.h:93
+#9  0x0000aaaac2d81640 in operator() (__closure=0xaaab00575d98) at /app/astra-sim/extern/helper/spdlog/include/spdlog/details/thread_pool-inl.h:29
+#10 0x0000aaaac2d83424 in std::__invoke_impl<void, spdlog::details::thread_pool::thread_pool(size_t, size_t, std::function<void()>, std::function<void()>)::<lambda()> >(std::__invoke_other, struct {...} &&) (__f=...) at /usr/include/c++/11/bits/invoke.h:61
+#11 0x0000aaaac2d833dc in std::__invoke<spdlog::details::thread_pool::thread_pool(size_t, size_t, std::function<void()>, std::function<void()>)::<lambda()> >(struct {...} &&) (__fn=...) at /usr/include/c++/11/bits/invoke.h:96
+#12 0x0000aaaac2d83378 in std::thread::_Invoker<std::tuple<spdlog::details::thread_pool::thread_pool(size_t, size_t, std::function<void()>, std::function<void()>)::<lambda()> > >::_M_invoke<0>(std::_Index_tuple<0>) (this=0xaaab00575d98) at /usr/include/c++/11/bits/std_thread.h:259
+#13 0x0000aaaac2d8334c in std::thread::_Invoker<std::tuple<spdlog::details::thread_pool::thread_pool(size_t, size_t, std::function<void()>, std::function<void()>)::<lambda()> > >::operator()(void) (this=0xaaab00575d98) at /usr/include/c++/11/bits/std_thread.h:266
+#14 0x0000aaaac2d8332c in std::thread::_State_impl<std::thread::_Invoker<std::tuple<spdlog::details::thread_pool::thread_pool(size_t, size_t, std::function<void()>, std::function<void()>)::<lambda()> > > >::_M_run(void) (this=0xaaab00575d90) at /usr/include/c++/11/bits/std_thread.h:211
+#15 0x0000ffff885a29cc in ?? () from /lib/aarch64-linux-gnu/libstdc++.so.6
+#16 0x0000ffff882d03a8 in start_thread (arg=0x80e860) at ./nptl/pthread_create.c:442
+#17 0x0000ffff88339f9c in thread_start () at ../sysdeps/unix/sysv/linux/aarch64/clone.S:79
+
+Thread 1 (Thread 0xffff8a4de880 (LWP 1589) "ns3.42-AstraSim"):
+#0  0x0000aaaac2b020b8 in ns3::Node::GetNDevices() const@plt ()
+#1  0x0000aaaac2b08940 in monitor_buffer (qlen_output=0xaaab0434a570, n=0xaaaac3147090 <n>) at /app/astra-sim/extern/network_backend/ns-3/scratch/../scratch/common.h:194
+#2  0x0000aaaac2b2b610 in ns3::MakeEvent<_IO_FILE*, ns3::NodeContainer*, _IO_FILE*, ns3::NodeContainer*>(void (*)(_IO_FILE*, ns3::NodeContainer*), _IO_FILE*, ns3::NodeContainer*)::EventFunctionImpl::Notify()::{lambda(_IO_FILE*, ns3::NodeContainer*)#1}::operator()(_IO_FILE*, ns3::NodeContainer*) const (__closure=0xffffcef4d650, args#0=0xaaab0434a570, args#1=0xaaaac3147090 <n>) at /app/astra-sim/extern/network_backend/ns-3/src/core/model/make-event.h:194
+#3  0x0000aaaac2b51388 in std::__invoke_impl<void, ns3::MakeEvent<_IO_FILE*, ns3::NodeContainer*, _IO_FILE*, ns3::NodeContainer*>(void (*)(_IO_FILE*, ns3::NodeContainer*), _IO_FILE*, ns3::NodeContainer*)::EventFunctionImpl::Notify()::{lambda(_IO_FILE*, ns3::NodeContainer*)#1}, _IO_FILE*&, ns3::NodeContainer*&>(std::__invoke_other, ns3::MakeEvent<_IO_FILE*, ns3::NodeContainer*, _IO_FILE*, ns3::NodeContainer*>(void (*)(_IO_FILE*, ns3::NodeContainer*), _IO_FILE*, ns3::NodeContainer*)::EventFunctionImpl::Notify()::{lambda(_IO_FILE*, ns3::NodeContainer*)#1}&&, _IO_FILE*&, ns3::NodeContainer*&) (__f=...) at /usr/include/c++/11/bits/invoke.h:61
+#4  0x0000aaaac2b3cadc in std::__invoke<ns3::MakeEvent<_IO_FILE*, ns3::NodeContainer*, _IO_FILE*, ns3::NodeContainer*>(void (*)(_IO_FILE*, ns3::NodeContainer*), _IO_FILE*, ns3::NodeContainer*)::EventFunctionImpl::Notify()::{lambda(_IO_FILE*, ns3::NodeContainer*)#1}, _IO_FILE*&, ns3::NodeContainer*&>(ns3::MakeEvent<_IO_FILE*, ns3::NodeContainer*, _IO_FILE*, ns3::NodeContainer*>(void (*)(_IO_FILE*, ns3::NodeContainer*), _IO_FILE*, ns3::NodeContainer*)::EventFunctionImpl::Notify()::{lambda(_IO_FILE*, ns3::NodeContainer*)#1}&&, _IO_FILE*&, ns3::NodeContainer*&) (__fn=...) at /usr/include/c++/11/bits/invoke.h:96
+#5  0x0000aaaac2b2b66c in std::__apply_impl<ns3::MakeEvent<_IO_FILE*, ns3::NodeContainer*, _IO_FILE*, ns3::NodeContainer*>(void (*)(_IO_FILE*, ns3::NodeContainer*), _IO_FILE*, ns3::NodeContainer*)::EventFunctionImpl::Notify()::{lambda(_IO_FILE*, ns3::NodeContainer*)#1}, std::tuple<_IO_FILE*, ns3::NodeContainer*>&, 0ul, 1ul>(ns3::MakeEvent<_IO_FILE*, ns3::NodeContainer*, _IO_FILE*, ns3::NodeContainer*>(void (*)(_IO_FILE*, ns3::NodeContainer*), _IO_FILE*, ns3::NodeContainer*)::EventFunctionImpl::Notify()::{lambda(_IO_FILE*, ns3::NodeContainer*)#1}&&, std::tuple<_IO_FILE*, ns3::NodeContainer*>&, std::integer_sequence<unsigned long, 0ul, 1ul>) (__f=..., __t=std::tuple containing = {...}) at /usr/include/c++/11/tuple:1854
+#6  0x0000aaaac2b2b6b4 in std::apply<ns3::MakeEvent<_IO_FILE*, ns3::NodeContainer*, _IO_FILE*, ns3::NodeContainer*>(void (*)(_IO_FILE*, ns3::NodeContainer*), _IO_FILE*, ns3::NodeContainer*)::EventFunctionImpl::Notify()::{lambda(_IO_FILE*, ns3::NodeContainer*)#1}, std::tuple<_IO_FILE*, ns3::NodeContainer*>&>(ns3::MakeEvent<_IO_FILE*, ns3::NodeContainer*, _IO_FILE*, ns3::NodeContainer*>(void (*)(_IO_FILE*, ns3::NodeContainer*), _IO_FILE*, ns3::NodeContainer*)::EventFunctionImpl::Notify()::{lambda(_IO_FILE*, ns3::NodeContainer*)#1}&&, std::tuple<_IO_FILE*, ns3::NodeContainer*>&) (__f=..., __t=std::tuple containing = {...}) at /usr/include/c++/11/tuple:1865
+#7  0x0000aaaac2b2b5b4 in ns3::MakeEvent<_IO_FILE*, ns3::NodeContainer*, _IO_FILE*, ns3::NodeContainer*>(void (*)(_IO_FILE*, ns3::NodeContainer*), _IO_FILE*, ns3::NodeContainer*)::EventFunctionImpl::Notify() (this=0xaaab03333f70) at /app/astra-sim/extern/network_backend/ns-3/src/core/model/make-event.h:194
+#8  0x0000ffff889425b8 in ns3::EventImpl::Invoke (this=0xaaab03333f70) at /app/astra-sim/extern/network_backend/ns-3/src/core/model/event-impl.cc:52
+#9  0x0000ffff88948800 in ns3::DefaultSimulatorImpl::ProcessOneEvent (this=0xaaab04551ac0) at /app/astra-sim/extern/network_backend/ns-3/src/core/model/default-simulator-impl.cc:144
+#10 0x0000ffff88948c78 in ns3::DefaultSimulatorImpl::Run (this=0xaaab04551ac0) at /app/astra-sim/extern/network_backend/ns-3/src/core/model/default-simulator-impl.cc:197
+#11 0x0000ffff88943628 in ns3::Simulator::Run () at /app/astra-sim/extern/network_backend/ns-3/src/core/model/simulator.cc:182
+#12 0x0000aaaac2b11bec in main (argc=7, argv=0xffffcef4db98) at /app/astra-sim/astra-sim/network_frontend/ns3/AstraSimNetwork.cc:302
+
+sim_send_waiting_hash: 0 keys
+$1 = std::map with 0 elementsPython Exception <class 'AttributeError'>: 'NoneType' object has no attribute 'pointer'
+
+
+sim_recv_waiting_hash: 32 keys
+$2 = std::map with 32 elementsPython Exception <class 'AttributeError'>: 'NoneType' object has no attribute 'pointer'
+
+
+received_msg_standby_hash: 28 keys
+$3 = std::map with 28 elementsPython Exception <class 'AttributeError'>: 'NoneType' object has no attribute 'pointer'
+Python Exception <class 'AttributeError'>: 'NoneType' object has no attribute 'pointer'
+
+
+Unfinished ranks: 32/32
+Rank 0: pending events 0, running streams 4, ready list empty std::__cxx11::list
+Traceback (most recent call last):
+  File "<string>", line 83, in <module>
+  File "<string>", line 77, in dump_rank_state
+  File "<string>", line 33, in dump_streams
+  File "/lib/aarch64-linux-gnu/../../share/gcc/python/libstdcxx/v6/printers.py", line 777, in children
+    node = lookup_node_type('_Rb_tree_node', self.val.type).pointer()
+AttributeError: 'NoneType' object has no attribute 'pointer'
+/tmp/tmp.HpV92Q8rmD:92: Error in sourced command file:
+Error while executing Python code.
+[Inferior 1 (process 1589) detached]

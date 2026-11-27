@@ -5,8 +5,7 @@ The script understands the files emitted by the NS-3 backend:
   fct.txt, qlen.txt, pfc.txt, flow.txt, trace.txt, and mix.tr.
 
 The packet trace is the binary TraceFormat record used by the backend. The
-current format is 56 bytes per record; the trailing SimSetting block is left
-out of the packet-record scan.
+current format is 56 bytes per record after the SimSetting header.
 """
 
 from __future__ import annotations
@@ -24,6 +23,7 @@ from statistics import mean
 FCT_FIELDS = ("source", "destination", "sport", "dport", "size", "start_ns", "fct_ns", "standalone_ns")
 TRACE_RECORD_SIZE = 56
 TRACE_HEADER = struct.Struct("<QHBBIIIHBBBB")
+TRACE_CHUNK_BYTES = 4 * 1024 * 1024
 EVENT_NAMES = {0: "Recv", 1: "Enqu", 2: "Dequ", 3: "Drop"}
 
 
@@ -233,32 +233,33 @@ def read_trace_nodes(path: Path) -> list[int]:
 
 
 def read_mix_trace(path: Path, record_size: int = TRACE_RECORD_SIZE) -> dict:
-    """Parse binary TraceFormat records and skip any trailing SimSetting bytes."""
+    """Parse binary TraceFormat records following the SimSetting header."""
     result = {
-        "records": 0,
-        "invalid_records": 0,
-        "first_ns": None,
-        "last_ns": None,
-        "events": Counter(),
-        "node_types": Counter(),
-        "max_qlen": None,
-        "max_qlen_node": None,
-        "max_qlen_interface": None,
-        "max_packet_bytes": None,
-        "max_time_ns": None,
-        "bytes_by_event": Counter(),
         "setting_entries": 0,
         "window_bytes": None,
         "trace_offset": 0,
         "interface_rates": {},
         "dequeue_bytes_by_interface": Counter(),
-        "packet_queue_durations": [],
-        "unmatched_dequeues": 0,
-        "enqueue_key_collisions": 0,
     }
     if record_size < TRACE_HEADER.size:
         raise ValueError("trace record size must be at least 32 bytes")
     pending_enqueues = {}
+    duration_counts = Counter()
+    records = invalid_records = unmatched_dequeues = enqueue_collisions = 0
+    event_counts = [0] * len(EVENT_NAMES)
+    event_bytes = [0] * len(EVENT_NAMES)
+    node_counts = [0, 0]
+    first_ns = last_ns = None
+    queue_peak = packet_peak = -1
+    queue_node = queue_interface = None
+    dequeue_bytes = result["dequeue_bytes_by_interface"]
+    chunk_size = max(1, TRACE_CHUNK_BYTES // record_size) * record_size
+    # The padding skips protocol/ECN and the unused bytes in the packet union.
+    if record_size >= TRACE_RECORD_SIZE:
+        decoder = struct.Struct(f"<QHBBIIIHxBxB2xHHI12xH{record_size - 54}x")
+    else:
+        decoder = struct.Struct(f"<QHBBIIIHxBxB{record_size - TRACE_HEADER.size}x")
+    file_size = path.stat().st_size
     with path.open("rb") as handle:
         # mix.tr begins with SimSetting: uint32 entry count, followed by
         # (uint16 node, uint8 interface, uint64 bit-rate) entries and a
@@ -269,8 +270,8 @@ def read_mix_trace(path: Path, record_size: int = TRACE_RECORD_SIZE) -> dict:
             settings_size = 4 + entry_count * 11 + 4
             valid_header = (
                 entry_count <= 100_000
-                and path.stat().st_size >= settings_size
-                and (path.stat().st_size - settings_size) % record_size == 0
+                and file_size >= settings_size
+                and (file_size - settings_size) % record_size == 0
             )
             if valid_header:
                 settings = handle.read(entry_count * 11)
@@ -287,68 +288,85 @@ def read_mix_trace(path: Path, record_size: int = TRACE_RECORD_SIZE) -> dict:
                     handle.seek(0)
             else:
                 handle.seek(0)
-        while True:
-            block = handle.read(record_size)
-            if len(block) < record_size:
+        while block := handle.read(chunk_size):
+            usable = len(block) - len(block) % record_size
+            if not usable:
                 break
-            try:
-                time_ns, node, interface, _qidx, qlen, _sip, _dip, size, _l3, event, _ecn, node_type = TRACE_HEADER.unpack_from(block)
-            except struct.error:
-                result["invalid_records"] += 1
-                continue
-            # Detect a trace generated with a different ABI rather than
-            # presenting nonsensical values as valid utilization results.
-            if event not in EVENT_NAMES or node_type not in (0, 1) or node > 65535:
-                result["invalid_records"] += 1
-                continue
-            result["records"] += 1
-            result["events"][EVENT_NAMES[event]] += 1
-            result["node_types"]["switch" if node_type else "host"] += 1
-            result["first_ns"] = time_ns if result["first_ns"] is None else min(result["first_ns"], time_ns)
-            result["last_ns"] = time_ns if result["last_ns"] is None else max(result["last_ns"], time_ns)
-            result["max_time_ns"] = time_ns if result["max_time_ns"] is None else max(result["max_time_ns"], time_ns)
-            result["bytes_by_event"][EVENT_NAMES[event]] += size
-            if event == 2:  # Dequ: bytes leaving an interface
-                result["dequeue_bytes_by_interface"][(node, interface)] += size
-            if event in (1, 2):  # Enqu/Dequ: data-packet union fields
-                # The data union is: uint16 sport, uint16 dport, uint32 seq,
-                # uint64 timestamp, uint16 page, uint16 payload.
-                sport, dport, sequence, _packet_ts, page, _payload = struct.unpack_from(
-                    "<HHI4xQHH", block, 32
-                )
-                packet_key = (node, interface, _qidx, _sip, _dip, sport, dport, sequence, page)
-                if event == 1:
-                    if packet_key in pending_enqueues:
-                        result["enqueue_key_collisions"] += 1
-                    pending_enqueues[packet_key] = time_ns
-                elif packet_key in pending_enqueues:
-                    enqueue_time = pending_enqueues.pop(packet_key)
-                    if time_ns >= enqueue_time:
-                        result["packet_queue_durations"].append(time_ns - enqueue_time)
+            view = memoryview(block)[:usable]
+            # Short alternate record sizes have no packet key to match.
+            if record_size >= TRACE_RECORD_SIZE:
+                decoded = decoder.iter_unpack(view)
+            else:
+                decoded = (header + (0, 0, 0, 0) for header in decoder.iter_unpack(view))
+            for (time_ns, node, interface, qidx, qlen, sip, dip, size, event,
+                 node_type, sport, dport, sequence, page) in decoded:
+                if event >= len(EVENT_NAMES) or node_type > 1:
+                    invalid_records += 1
+                    continue
+                records += 1
+                event_counts[event] += 1
+                event_bytes[event] += size
+                node_counts[node_type] += 1
+                if first_ns is None or time_ns < first_ns:
+                    first_ns = time_ns
+                if last_ns is None or time_ns > last_ns:
+                    last_ns = time_ns
+                if event == 2:
+                    dequeue_bytes[node, interface] += size
+                if event == 1 or event == 2:
+                    if record_size < TRACE_RECORD_SIZE:
+                        raise struct.error("Trace record is too short to decode a packet key")
+                    key = (node, interface, qidx, sip, dip, sport, dport, sequence, page)
+                    if event == 1:
+                        if key in pending_enqueues:
+                            enqueue_collisions += 1
+                        pending_enqueues[key] = time_ns
                     else:
-                        result["unmatched_dequeues"] += 1
-                else:
-                    # The backend can emit a second Dequ record for the same
-                    # packet through its RDMA-QP dequeue trace source.
-                    result["unmatched_dequeues"] += 1
-            if result["max_qlen"] is None or qlen > result["max_qlen"]:
-                result.update(max_qlen=qlen, max_qlen_node=node, max_qlen_interface=interface)
-            if result["max_packet_bytes"] is None or size > result["max_packet_bytes"]:
-                result["max_packet_bytes"] = size
-    result["trailing_bytes"] = path.stat().st_size % record_size
+                        enqueue_time = pending_enqueues.pop(key, None)
+                        if enqueue_time is not None and time_ns >= enqueue_time:
+                            duration_counts[time_ns - enqueue_time] += 1
+                        else:
+                            unmatched_dequeues += 1
+                if qlen > queue_peak:
+                    queue_peak, queue_node, queue_interface = qlen, node, interface
+                if size > packet_peak:
+                    packet_peak = size
+    result.update(
+        records=records, invalid_records=invalid_records, first_ns=first_ns,
+        last_ns=last_ns, max_time_ns=last_ns, unmatched_dequeues=unmatched_dequeues,
+        enqueue_key_collisions=enqueue_collisions, max_qlen=queue_peak if records else None,
+        max_qlen_node=queue_node, max_qlen_interface=queue_interface,
+        max_packet_bytes=packet_peak if records else None,
+        events=Counter({name: event_counts[event] for event, name in EVENT_NAMES.items() if event_counts[event]}),
+        bytes_by_event=Counter({name: event_bytes[event] for event, name in EVENT_NAMES.items() if event_counts[event]}),
+        node_types=Counter({name: count for name, count in zip(("host", "switch"), node_counts) if count}),
+        trailing_bytes=file_size % record_size,
+    )
     result["recognized"] = (
         result["records"] > 0
         and result["invalid_records"] <= max(10, result["records"] // 10)
         and (result["max_time_ns"] or 0) <= 10**15
     )
-    durations = result["packet_queue_durations"]
-    result["packet_queue_count"] = len(durations)
-    result["packet_queue_median_ns"] = percentile(durations, 0.50)
-    result["packet_queue_p95_ns"] = percentile(durations, 0.95)
-    result["packet_queue_max_ns"] = max(durations) if durations else None
-    result["packet_queue_mean_ns"] = mean(durations) if durations else None
-    # Keep the report object compact after calculating summary statistics.
-    result.pop("packet_queue_durations", None)
+    count = sum(duration_counts.values())
+    result["packet_queue_count"] = count
+    result["packet_queue_median_ns"] = None
+    result["packet_queue_p95_ns"] = None
+    result["packet_queue_max_ns"] = max(duration_counts, default=None)
+    result["packet_queue_mean_ns"] = (
+        sum(duration * frequency for duration, frequency in duration_counts.items()) / count
+        if count else None
+    )
+    if count:
+        median_index = int((count - 1) * 0.50)
+        p95_index = int((count - 1) * 0.95)
+        cumulative = 0
+        for duration, frequency in sorted(duration_counts.items()):
+            cumulative += frequency
+            if cumulative > median_index and result["packet_queue_median_ns"] is None:
+                result["packet_queue_median_ns"] = duration
+            if cumulative > p95_index:
+                result["packet_queue_p95_ns"] = duration
+                break
     if result["recognized"] and result["first_ns"] is not None and result["last_ns"] > result["first_ns"]:
         duration_seconds = (result["last_ns"] - result["first_ns"]) / 1e9
         utilizations = []
@@ -415,7 +433,10 @@ def md_row(values: list[object]) -> str:
     return "| " + " | ".join(str(value) for value in values) + " |"
 
 
-def generate_report(result_dir: Path, output: Path, completion_log: Path | None, trace_record_size: int) -> None:
+def generate_report(
+    result_dir: Path, output: Path, completion_log: Path | None,
+    trace_record_size: int, *, skip_packet_trace: bool = False,
+) -> None:
     fct_path = result_dir / "fct.txt"
     qlen_path = result_dir / "qlen.txt"
     pfc_path = result_dir / "pfc.txt"
@@ -426,7 +447,7 @@ def generate_report(result_dir: Path, output: Path, completion_log: Path | None,
     fct = read_fct(fct_path) if fct_path.exists() else {"rows": 0, "by_size": {}}
     qlen = read_qlen(qlen_path) if qlen_path.exists() else {}
     pfc = read_pfc(pfc_path) if pfc_path.exists() else {"events": 0}
-    mix = read_mix_trace(mix_path, trace_record_size) if mix_path.exists() else {}
+    mix = read_mix_trace(mix_path, trace_record_size) if not skip_packet_trace and mix_path.exists() else {}
     completion = read_completion_log(completion_log)
     roofline_stats = completion.get("roofline_stats", {})
 
@@ -605,6 +626,8 @@ def generate_report(result_dir: Path, output: Path, completion_log: Path | None,
             md_row(["Unmatched/duplicate dequeues", fmt_num(mix.get("unmatched_dequeues"))]),
             md_row(["Enqueue-key collisions", fmt_num(mix.get("enqueue_key_collisions"))]),
         ]
+    elif skip_packet_trace:
+        lines.append(md_row(["Packet trace", "Skipped with --skip-packet-trace"]))
     else:
         lines.append(md_row(["Packet trace", "mix.tr not supplied"]))
     lines += [
@@ -659,13 +682,16 @@ def main() -> None:
         help="ASTRA-sim stdout/spdlog file with completion lines and optional roofline statistics",
     )
     parser.add_argument("--trace-record-size", type=int, default=TRACE_RECORD_SIZE, help="Binary mix.tr record size; default: 56")
+    parser.add_argument("--skip-packet-trace", action="store_true",
+                        help="Generate the report without scanning mix.tr")
     args = parser.parse_args()
     if not args.results_dir.is_dir():
         parser.error(f"result directory does not exist: {args.results_dir}")
     output = choose_output_path(args.results_dir, args.output)
     while True:
         try:
-            generate_report(args.results_dir, output, args.log, args.trace_record_size)
+            generate_report(args.results_dir, output, args.log, args.trace_record_size,
+                            skip_packet_trace=args.skip_packet_trace)
             break
         except FileExistsError:
             # Another run may have claimed the candidate between selection and
