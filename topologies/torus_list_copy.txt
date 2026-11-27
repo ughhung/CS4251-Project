@@ -2,6 +2,7 @@ A="--host-delay-ns 500 --fabric-delay-ns 500"
 
 python3 gen_topo.py torus $A                               -o torus_base_uniform.txt
 python3 gen_topo.py torus $A --twist 4                     -o torus_twisted_uniform.txt
+python3 gen_topo.py torus $A --twist 2                     -o torus_twisted2_uniform.txt
 python3 gen_topo.py torus $A --placement aligned           -o torus_aligned_uniform.txt
 python3 gen_topo.py torus $A --placement random --seed 1   -o torus_random1_uniform.txt
 python3 gen_topo.py torus $A --placement random --seed 2   -o torus_random2_uniform.txt
@@ -14,6 +15,7 @@ A="--host-delay-ns 1 --fabric-delay-ns 500"
 
 python3 gen_topo.py torus $A                               -o torus_base_hostlink.txt
 python3 gen_topo.py torus $A --twist 4                     -o torus_twisted_hostlink.txt
+python3 gen_topo.py torus $A --twist 2                     -o torus_twisted2_hostlink.txt
 python3 gen_topo.py torus $A --placement aligned           -o torus_aligned_hostlink.txt
 python3 gen_topo.py torus $A --placement random --seed 1   -o torus_random1_hostlink.txt
 python3 gen_topo.py torus $A --placement random --seed 2   -o torus_random2_hostlink.txt
